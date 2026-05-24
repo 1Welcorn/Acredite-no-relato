@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acredite no Relato — Relato Pessoal e Adjetivos</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg2: #111827;
+      --card: rgba(255,255,255,0.10);
+      --card2: rgba(255,255,255,0.16);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --accent2: #facc15;
+      --success: #34d399;
+      --danger: #fb7185;
+      --purple: #c084fc;
+      --orange: #fb923c;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 26px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(56,189,248,.28), transparent 32%),
+        radial-gradient(circle at 85% 18%, rgba(250,204,21,.22), transparent 28%),
+        radial-gradient(circle at 70% 95%, rgba(192,132,252,.20), transparent 34%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,.14);
+    }
+
+    .topbar {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      min-width: 230px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      box-shadow: 0 10px 25px rgba(56,189,248,.25);
+      font-size: 24px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.05;
+      letter-spacing: .2px;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: var(--text);
+      background: rgba(255,255,255,.12);
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.19);
+      box-shadow: 0 10px 25px rgba(0,0,0,.20);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #0284c7, #7c3aed);
+      border-color: transparent;
+    }
+
+    .btn.yellow {
+      background: linear-gradient(135deg, #f59e0b, #eab308);
+      color: #1f2937;
+      border-color: transparent;
+    }
+
+    .btn.green {
+      background: linear-gradient(135deg, #10b981, #22c55e);
+      border-color: transparent;
+    }
+
+    .btn.red {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      border-color: transparent;
+    }
+
+    .progress-wrap {
+      height: 5px;
+      width: 100%;
+      background: rgba(255,255,255,.08);
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--purple));
+      transition: width .25s ease;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 18px 80px;
+      flex: 1;
+    }
+
+    .slide {
+      display: none;
+      animation: fadeIn .35s ease both;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      min-height: calc(100vh - 155px);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 22px 0;
+    }
+
+    .hero-card {
+      width: min(1050px, 100%);
+      padding: clamp(28px, 5vw, 62px);
+      border-radius: 36px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.07)),
+        radial-gradient(circle at 10% 20%, rgba(56,189,248,.22), transparent 30%),
+        radial-gradient(circle at 90% 40%, rgba(250,204,21,.20), transparent 34%);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -28% 35%;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255,255,255,.18), transparent 66%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: rgba(15,23,42,.55);
+      border: 1px solid rgba(255,255,255,.16);
+      color: #e0f2fe;
+      font-weight: 800;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 6vw, 76px);
+      line-height: .96;
+      margin: 0 0 20px;
+      letter-spacing: -1.5px;
+    }
+
+    h3 {
+      font-size: clamp(26px, 3.4vw, 46px);
+      line-height: 1.04;
+      margin: 0 0 16px;
+      letter-spacing: -.6px;
+    }
+
+    h4 {
+      font-size: 23px;
+      margin: 0 0 10px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 18px;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin: 0 auto 22px;
+      font-size: clamp(18px, 2vw, 24px);
+      color: #e2e8f0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.17);
+    }
+
+    .card.soft {
+      background: rgba(255,255,255,.08);
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-9 { grid-column: span 9; }
+    .span-12 { grid-column: span 12; }
+
+    .mission-number {
+      display: inline-grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--accent2), var(--orange));
+      color: #1e293b;
+      font-weight: 900;
+      margin-bottom: 12px;
+      box-shadow: 0 12px 22px rgba(250,204,21,.18);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.11);
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,.14);
+      font-weight: 700;
+      font-size: 13px;
+      margin: 4px;
+    }
+
+    .tag.blue { background: rgba(56,189,248,.18); }
+    .tag.yellow { background: rgba(250,204,21,.18); }
+    .tag.green { background: rgba(52,211,153,.18); }
+    .tag.red { background: rgba(251,113,133,.18); }
+    .tag.purple { background: rgba(192,132,252,.18); }
+
+    .quote {
+      font-size: 21px;
+      line-height: 1.65;
+      color: #f8fafc;
+      background: rgba(15,23,42,.48);
+      border-left: 6px solid var(--accent2);
+      padding: 20px 22px;
+      border-radius: 20px;
+      margin: 14px 0;
+    }
+
+    .adj {
+      color: #fde68a;
+      font-weight: 900;
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 4px;
+      cursor: help;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .versao {
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .versao h4 {
+      color: #fef3c7;
+    }
+
+    .big-letter {
+      width: 54px;
+      height: 54px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(255,255,255,.16);
+      font-size: 30px;
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin: 14px 0 0;
+    }
+
+    .list .item {
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #e2e8f0;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .item strong { color: #fff; }
+
+    .stage {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      margin-bottom: 12px;
+    }
+
+    .stage .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(56,189,248,.35), rgba(192,132,252,.30));
+      font-size: 26px;
+    }
+
+    .teacher-note {
+      display: none;
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(250,204,21,.14);
+      border: 1px solid rgba(250,204,21,.26);
+      color: #fef9c3;
+      line-height: 1.45;
+    }
+
+    body.show-teacher .teacher-note { display: block; }
+
+    .form-row {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    label {
+      font-weight: 800;
+      color: #e2e8f0;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(15,23,42,.45);
+      color: #fff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(56,189,248,.16);
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .timer {
+      font-size: clamp(56px, 8vw, 98px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #fff;
+      text-shadow: 0 12px 30px rgba(0,0,0,.25);
+      margin: 12px 0 18px;
+    }
+
+    .timer-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .scoreboard {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .score-card {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.15);
+      text-align: center;
+    }
+
+    .score-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      min-height: 38px;
+      display: grid;
+      place-items: center;
+    }
+
+    .score-value {
+      font-size: 44px;
+      font-weight: 900;
+      color: #fef08a;
+      margin-bottom: 8px;
+    }
+
+    .score-actions {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .small-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 8px 10px;
+      color: #fff;
+      background: rgba(255,255,255,.16);
+      cursor: pointer;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .small-btn:hover { background: rgba(255,255,255,.24); }
+
+    .narrator-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .narrator-number {
+      width: 62px;
+      height: 62px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      margin-bottom: 14px;
+    }
+
+    .vote-area {
+      display: grid;
+      gap: 12px;
+    }
+
+    .vote-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 120px;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .bar-wrap {
+      height: 25px;
+      background: rgba(15,23,42,.5);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px;
+      transition: width .25s ease;
+    }
+
+    .reveal {
+      display: none;
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(52,211,153,.24), rgba(56,189,248,.16));
+      border: 1px solid rgba(52,211,153,.35);
+      text-align: center;
+    }
+
+    .reveal.show { display: block; }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+    }
+
+    th, td {
+      border: 1px solid rgba(255,255,255,.13);
+      padding: 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(15,23,42,.55);
+      color: #fef3c7;
+      font-size: 15px;
+    }
+
+    td input, td textarea {
+      border-radius: 12px;
+      min-height: 52px;
+      background: rgba(15,23,42,.28);
+      font-size: 14px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .chip {
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.11);
+      color: #f8fafc;
+      border-radius: 999px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .12s ease, background .12s ease;
+    }
+
+    .chip:hover {
+      transform: scale(1.03);
+      background: rgba(250,204,21,.22);
+    }
+
+    .selected-words {
+      min-height: 72px;
+      background: rgba(15,23,42,.38);
+      border: 1px dashed rgba(255,255,255,.25);
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .selected-words .chip {
+      background: rgba(52,211,153,.20);
+    }
+
+    .prompt-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.13);
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+      min-height: 120px;
+    }
+
+    .prompt-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.16);
+    }
+
+    .prompt-card strong {
+      display: block;
+      color: #fef08a;
+      font-size: 19px;
+      margin-bottom: 6px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(2,6,23,.82);
+      z-index: 50;
+      padding: 18px;
+    }
+
+    .modal.show { display: grid; }
+
+    .modal-card {
+      width: min(950px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(30,41,59,.98), rgba(15,23,42,.98));
+      border: 1px solid rgba(255,255,255,.20);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      position: relative;
+    }
+
+    .close {
+      position: sticky;
+      top: 0;
+      float: right;
+      border: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .rubric {
+      display: grid;
+      gap: 10px;
+    }
+
+    .rubric-row {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      background: rgba(255,255,255,.08);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .rubric-row span:last-child {
+      text-align: center;
+      font-weight: 900;
+      color: #fef08a;
+    }
+
+    .floating-help {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      background: rgba(15,23,42,.96);
+      color: white;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      padding: 12px 16px;
+      z-index: 100;
+      transition: .25s ease;
+      box-shadow: var(--shadow);
+      font-weight: 800;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .print-only {
+      display: none;
+    }
+
+    .hidden-by-default {
+      display: none;
+    }
+
+
+    .concept-card {
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .concept-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(52,211,153,.38);
+    }
+
+    .concept-card.concept-read {
+      background:
+        linear-gradient(135deg, rgba(16,185,129,.42), rgba(34,197,94,.24)),
+        rgba(255,255,255,.08);
+      border-color: rgba(52,211,153,.70);
+      box-shadow: 0 18px 42px rgba(16,185,129,.20);
+    }
+
+    .concept-card.concept-read h3,
+    .concept-card.concept-read h4 {
+      color: #ecfdf5;
+    }
+
+    .concept-card.concept-read .eyebrow {
+      background: rgba(6,95,70,.55);
+      color: #d1fae5;
+      border-color: rgba(167,243,208,.35);
+    }
+
+    .concept-card.concept-read::after {
+      content: "✓ Conceito marcado";
+      display: inline-flex;
+      margin-top: 14px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(6,95,70,.55);
+      color: #d1fae5;
+      font-weight: 900;
+      border: 1px solid rgba(167,243,208,.35);
+    }
+
+    @media (max-width: 920px) {
+      .grid, .two-col {
+        grid-template-columns: 1fr;
+      }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-12 {
+        grid-column: span 1;
+      }
+      .scoreboard {
+        grid-template-columns: 1fr 1fr;
+      }
+      .vote-row {
+        grid-template-columns: 1fr;
+      }
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .controls {
+        justify-content: flex-start;
+      }
+      .hero {
+        min-height: auto;
+      }
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        color: #111827 !important;
+      }
+      header, .floating-help, .modal, .toast, .no-print, .slide:not(.print-target) {
+        display: none !important;
+      }
+      main {
+        padding: 0;
+        max-width: 100%;
+      }
+      .slide.active {
+        display: block;
+      }
+      .print-only {
+        display: block;
+      }
+      .card, .hero-card, table, th, td {
+        background: white !important;
+        color: #111827 !important;
+        border-color: #111827 !important;
+        box-shadow: none !important;
+      }
+      p, .lead, .item, label {
+        color: #111827 !important;
+      }
+      input, textarea {
+        color: #111827 !important;
+        background: white !important;
+        border: 1px solid #111827 !important;
+      }
+      .tag, .chip {
+        background: #f3f4f6 !important;
+        color: #111827 !important;
+        border: 1px solid #111827 !important;
+      }
+      h2, h3, h4 {
+        color: #111827 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="no-print">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo">🎙️</div>
+          <div>
+            <h1>Acredite no Relato</h1>
+            <span>6º ano • Relato pessoal • Adjetivos</span>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn" onclick="prevSlide()">← Voltar</button>
+          <button class="btn primary" onclick="nextSlide()">Avançar →</button>
+          <button class="btn" onclick="toggleTeacher()">Modo professor</button>
+          <button class="btn" onclick="speakCurrent()">🔊 Ouvir</button>
+          <button class="btn" onclick="toggleFullscreen()">⛶ Tela cheia</button>
+        </div>
+      </div>
+      <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+    </header>
+
+    <main>
+      <!-- SLIDE 0 -->
+      <section class="slide active" data-title="Abertura">
+        <div class="hero">
+          <div class="hero-card">
+            <div class="eyebrow">Missão de linguagem</div>
+            <h2>Acredite no Relato</h2>
+            <p class="lead">
+              Uma aula gamificada em que a turma investiga relatos pessoais, descobre pistas de verdade
+              e analisa como os <strong style="color:#fef08a;">adjetivos</strong> criam emoção, imagem e sentido.
+            </p>
+            <div>
+              <span class="tag blue">🎯 Relato pessoal</span>
+              <span class="tag yellow">✨ Efeitos de sentido</span>
+              <span class="tag green">🕵️ Protagonismo</span>
+              <span class="tag purple">🎤 Oralidade</span>
+            </div>
+            <div class="teacher-note">
+              Sugestão: apresente a atividade como uma versão escolar inspirada em quadros de investigação de histórias.
+              Evite usar a palavra “mentiroso”; prefira “narradores encenadores”.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 1 -->
+      <section class="slide" data-title="Objetivos">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Objetivos da aula</div>
+            <h3>Hoje a turma será autora, investigadora e analista de linguagem.</h3>
+          </div>
+
+          <div class="card span-4">
+            <div class="mission-number">1</div>
+            <h4>Reconhecer o relato pessoal</h4>
+            <p>Identificar 1ª pessoa, tempo, lugar, sequência dos acontecimentos, sentimentos e reflexão.</p>
+          </div>
+
+          <div class="card span-4">
+            <div class="mission-number">2</div>
+            <h4>Analisar adjetivos</h4>
+            <p>Perceber como os adjetivos criam humor, medo, surpresa, carinho, vergonha ou emoção.</p>
+          </div>
+
+          <div class="card span-4">
+            <div class="mission-number">3</div>
+            <h4>Justificar hipóteses</h4>
+            <p>Votar em quem parece ter vivido a história usando argumentos baseados nas pistas do texto.</p>
+          </div>
+
+          <div class="card span-12">
+            <h4>Frase-chave da aula</h4>
+            <div class="quote">
+              Um relato pessoal não conta apenas o que aconteceu. Ele faz o leitor ou ouvinte
+              <strong>sentir</strong> a experiência.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2 -->
+      <section class="slide" data-title="Aquecimento">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Aquecimento</div>
+            <h3>Qual texto você consegue imaginar melhor?</h3>
+            <p>Leia as duas versões e peça que a turma observe quais palavras deixam a cena mais viva.</p>
+          </div>
+
+          <div class="card span-6 versao">
+            <div>
+              <h4><span class="big-letter">A</span>Versão simples</h4>
+              <div class="quote">
+                Eu fui ao parque com minha família. O dia estava bom. Comemos lanche e brincamos bastante.
+                Depois voltamos para casa.
+              </div>
+            </div>
+            <button class="btn" onclick="openModal('modalPerguntasA')">Perguntas para a turma</button>
+          </div>
+
+          <div class="card span-6 versao">
+            <div>
+              <h4><span class="big-letter">B</span>Versão com adjetivos</h4>
+              <div class="quote">
+                Eu fui ao parque com minha família em uma manhã <span class="adj">ensolarada</span>.
+                O gramado estava <span class="adj">verdinho</span>, o vento era <span class="adj">fresco</span>
+                e o lanche parecia <span class="adj">delicioso</span>. Foi um daqueles dias
+                <span class="adj">simples</span>, mas <span class="adj">inesquecíveis</span>.
+              </div>
+            </div>
+            <button class="btn yellow" onclick="openModal('modalPerguntasB')">Ver adjetivos e efeitos</button>
+          </div>
+
+          <div class="card span-12">
+            <h4>Pergunta central</h4>
+            <p>
+              A segunda versão parece mais viva porque os adjetivos ajudam a construir imagem mental e sentimento.
+              Eles não servem apenas para “enfeitar”: eles mudam o efeito do relato.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3 -->
+      <section class="slide" data-title="Conceitos">
+        <div class="grid">
+          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar este conceito em verde">
+            <div class="eyebrow">Conceito 1</div>
+            <h3>O que é relato pessoal?</h3>
+            <div class="list">
+              <div class="item"><strong>Experiência vivida:</strong> alguém conta algo que aconteceu consigo.</div>
+              <div class="item"><strong>1ª pessoa:</strong> eu, nós, meu, minha, comigo.</div>
+              <div class="item"><strong>Tempo e lugar:</strong> quando e onde aconteceu.</div>
+              <div class="item"><strong>Sequência:</strong> começo, meio e fim.</div>
+              <div class="item"><strong>Sentimentos:</strong> o que a pessoa sentiu ou aprendeu.</div>
+            </div>
+          </div>
+
+          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar este conceito em verde">
+            <div class="eyebrow">Conceito 2</div>
+            <h3>O que os adjetivos fazem?</h3>
+            <div class="list">
+              <div class="item"><strong>Criam imagem:</strong> sala enorme, noite escura, mochila pesada.</div>
+              <div class="item"><strong>Revelam sentimento:</strong> nervoso, feliz, constrangido, orgulhoso.</div>
+              <div class="item"><strong>Intensificam o clima:</strong> assustador, emocionante, engraçado.</div>
+              <div class="item"><strong>Mostram opinião:</strong> experiência incrível, dia inesquecível.</div>
+              <div class="item"><strong>Mudam o sentido:</strong> “silencioso” não causa o mesmo efeito que “barulhento”.</div>
+            </div>
+          </div>
+
+          <div class="card span-12">
+            <h4>Fórmula de análise</h4>
+            <div class="quote">
+              Adjetivo usado + elemento caracterizado + efeito no leitor/ouvinte.
+              <br>
+              Exemplo: <strong>auditório enorme</strong> → faz o lugar parecer intimidador.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4 -->
+      <section class="slide" data-title="Como funciona">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Jogo principal</div>
+            <h3>Como funciona o “Acredite no Relato”?</h3>
+          </div>
+
+          <div class="card span-7">
+            <div class="stage">
+              <div class="icon">👥</div>
+              <div>
+                <h4>1. Trio de narradores</h4>
+                <p>Três alunos sobem. Os três contarão a mesma história em 1ª pessoa.</p>
+              </div>
+            </div>
+            <div class="stage">
+              <div class="icon">✅</div>
+              <div>
+                <h4>2. Apenas um viveu a história</h4>
+                <p>Um aluno é o verdadeiro dono do relato. Os outros dois são narradores encenadores.</p>
+              </div>
+            </div>
+            <div class="stage">
+              <div class="icon">🎙️</div>
+              <div>
+                <h4>3. Cada um apresenta</h4>
+                <p>Cada narrador tem até 1 minuto para contar a experiência usando pelo menos 3 adjetivos.</p>
+              </div>
+            </div>
+            <div class="stage">
+              <div class="icon">🕵️</div>
+              <div>
+                <h4>4. A turma investiga</h4>
+                <p>Os colegas fazem perguntas, anotam adjetivos, analisam os efeitos e votam com justificativa.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card span-5">
+            <h4>Combinados importantes</h4>
+            <div class="list">
+              <div class="item">Não usar histórias íntimas, traumáticas ou que exponham colegas/família.</div>
+              <div class="item">Não debochar da fala de ninguém.</div>
+              <div class="item">A pergunta deve investigar o relato, não constranger a pessoa.</div>
+              <div class="item">O voto precisa ter justificativa: detalhes, sentimentos e adjetivos.</div>
+            </div>
+            <div class="teacher-note">
+              Para turmas agitadas, faça a primeira rodada com um relato-modelo criado pelo professor.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5 -->
+      <section class="slide" data-title="Preparação">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Preparação do trio</div>
+            <h3>Antes de apresentar, o trio organiza a história.</h3>
+          </div>
+
+          <div class="card span-7">
+            <div class="form-row">
+              <label>1. Título da história</label>
+              <input id="storyTitle" placeholder="Ex.: O dia em que eu paguei um mico na apresentação" />
+            </div>
+            <div class="form-row">
+              <label>2. Quando aconteceu?</label>
+              <input placeholder="Ex.: no ano passado, em uma manhã de segunda-feira..." />
+            </div>
+            <div class="form-row">
+              <label>3. Onde aconteceu?</label>
+              <input placeholder="Ex.: na escola, no parque, na casa da minha avó..." />
+            </div>
+            <div class="form-row">
+              <label>4. O que aconteceu? Faça um resumo seguro.</label>
+              <textarea placeholder="Começo, meio e fim da experiência..."></textarea>
+            </div>
+            <div class="form-row">
+              <label>5. Quais sentimentos apareceram?</label>
+              <input placeholder="Ex.: vergonha, alegria, medo, surpresa, orgulho..." />
+            </div>
+          </div>
+
+          <div class="card span-5">
+            <h4>Checklist do relato</h4>
+            <div class="list">
+              <label class="item"><input type="checkbox" /> Tem narrador em 1ª pessoa.</label>
+              <label class="item"><input type="checkbox" /> Tem tempo e lugar.</label>
+              <label class="item"><input type="checkbox" /> Tem começo, meio e fim.</label>
+              <label class="item"><input type="checkbox" /> Tem pelo menos 3 adjetivos por narrador.</label>
+              <label class="item"><input type="checkbox" /> Tem sentimentos ou reflexão final.</label>
+            </div>
+            <button class="btn yellow" onclick="copyStoryStarter()">Copiar começo sugerido</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6 -->
+      <section class="slide" data-title="Banco de Adjetivos">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Banco de palavras</div>
+            <h3>Escolha adjetivos para construir o clima do relato.</h3>
+            <p>Clique nas palavras para montar um banco de adjetivos da equipe.</p>
+          </div>
+
+          <div class="card span-4">
+            <h4>😊 Alegria / carinho</h4>
+            <div class="chips" data-category="happy">
+              <button class="chip">alegre</button>
+              <button class="chip">divertido</button>
+              <button class="chip">especial</button>
+              <button class="chip">inesquecível</button>
+              <button class="chip">animado</button>
+              <button class="chip">colorido</button>
+              <button class="chip">gostoso</button>
+              <button class="chip">tranquilo</button>
+              <button class="chip">carinhoso</button>
+              <button class="chip">doce</button>
+            </div>
+          </div>
+
+          <div class="card span-4">
+            <h4>😱 Medo / tensão</h4>
+            <div class="chips" data-category="fear">
+              <button class="chip">escuro</button>
+              <button class="chip">estranho</button>
+              <button class="chip">silencioso</button>
+              <button class="chip">assustador</button>
+              <button class="chip">frio</button>
+              <button class="chip">perigoso</button>
+              <button class="chip">misterioso</button>
+              <button class="chip">inesperado</button>
+              <button class="chip">enorme</button>
+              <button class="chip">vazio</button>
+            </div>
+          </div>
+
+          <div class="card span-4">
+            <h4>😳 Vergonha / surpresa</h4>
+            <div class="chips" data-category="shame">
+              <button class="chip">constrangedor</button>
+              <button class="chip">embaraçoso</button>
+              <button class="chip">confuso</button>
+              <button class="chip">engraçado</button>
+              <button class="chip">inesperado</button>
+              <button class="chip">barulhento</button>
+              <button class="chip">agitado</button>
+              <button class="chip">difícil</button>
+              <button class="chip">marcante</button>
+              <button class="chip">surpreendente</button>
+            </div>
+          </div>
+
+          <div class="card span-12">
+            <h4>Adjetivos escolhidos pela equipe</h4>
+            <div id="selectedWords" class="selected-words"></div>
+            <button class="btn" onclick="clearSelectedWords()">Limpar palavras</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7 -->
+      <section class="slide" data-title="Apresentação">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Hora do palco</div>
+            <h3>Três narradores. Uma história. Quem realmente viveu?</h3>
+          </div>
+
+          <div class="card span-4 narrator-card">
+            <div class="narrator-number">1</div>
+            <h4>Narrador 1</h4>
+            <p>Conte em 1ª pessoa. Use detalhes de tempo, lugar, sentimentos e pelo menos 3 adjetivos.</p>
+            <button class="btn primary" onclick="setTimer(60)">⏱️ 1 minuto</button>
+          </div>
+
+          <div class="card span-4 narrator-card">
+            <div class="narrator-number">2</div>
+            <h4>Narrador 2</h4>
+            <p>Conte a mesma história, mas com sua entonação. Tente manter coerência e detalhes.</p>
+            <button class="btn primary" onclick="setTimer(60)">⏱️ 1 minuto</button>
+          </div>
+
+          <div class="card span-4 narrator-card">
+            <div class="narrator-number">3</div>
+            <h4>Narrador 3</h4>
+            <p>Use adjetivos expressivos para criar clima. A turma observará suas escolhas de palavras.</p>
+            <button class="btn primary" onclick="setTimer(60)">⏱️ 1 minuto</button>
+          </div>
+
+          <div class="card span-12 timer-box">
+            <h4>Cronômetro da apresentação</h4>
+            <div id="timer" class="timer">01:00</div>
+            <div class="timer-controls">
+              <button class="btn green" onclick="startTimer()">Iniciar</button>
+              <button class="btn" onclick="pauseTimer()">Pausar</button>
+              <button class="btn" onclick="setTimer(60)">1 min</button>
+              <button class="btn" onclick="setTimer(120)">2 min</button>
+              <button class="btn red" onclick="resetTimer()">Zerar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8 -->
+      <section class="slide" data-title="Perguntas Investigativas">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Júri investigativo</div>
+            <h3>Perguntas que ajudam a descobrir o verdadeiro relato.</h3>
+            <p>Clique em uma pergunta para ampliá-la e usar com a turma.</p>
+          </div>
+
+          <div class="prompt-card span-4" onclick="showPrompt('Como era o lugar onde isso aconteceu? Use pelo menos um adjetivo para descrever.')">
+            <strong>Lugar</strong>
+            Como era o lugar onde isso aconteceu?
+          </div>
+
+          <div class="prompt-card span-4" onclick="showPrompt('O que você sentiu no momento mais importante da história?')">
+            <strong>Sentimento</strong>
+            O que você sentiu no momento mais importante?
+          </div>
+
+          <div class="prompt-card span-4" onclick="showPrompt('Que detalhe você nunca esqueceu desse dia?')">
+            <strong>Detalhe</strong>
+            Que detalhe você nunca esqueceu?
+          </div>
+
+          <div class="prompt-card span-4" onclick="showPrompt('O ambiente estava calmo, barulhento, escuro, cheio, vazio ou diferente? Explique.')">
+            <strong>Ambiente</strong>
+            O ambiente estava como?
+          </div>
+
+          <div class="prompt-card span-4" onclick="showPrompt('Que adjetivo você escolheria para resumir essa experiência? Por quê?')">
+            <strong>Adjetivo-chave</strong>
+            Que adjetivo resume essa experiência?
+          </div>
+
+          <div class="prompt-card span-4" onclick="showPrompt('Depois que tudo aconteceu, o que mudou em você ou o que você aprendeu?')">
+            <strong>Reflexão</strong>
+            O que você aprendeu?
+          </div>
+
+          <div class="card span-12">
+            <h4>Regra do júri</h4>
+            <div class="quote">
+              A pergunta deve ajudar a entender o relato. Não pode expor, constranger ou debochar de ninguém.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9 -->
+      <section class="slide" data-title="Ficha de investigação">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Ficha de investigação</div>
+            <h3>Anote as pistas antes de votar.</h3>
+            <p>O voto precisa ser baseado em linguagem: detalhes, coerência, sentimentos e efeitos de sentido dos adjetivos.</p>
+          </div>
+
+          <div class="card span-12 print-target">
+            <h4>Registro da turma</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Narrador</th>
+                  <th>Adjetivos usados</th>
+                  <th>Efeito de sentido</th>
+                  <th>Parece verdadeiro? Por quê?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Narrador 1</strong></td>
+                  <td><textarea placeholder="Ex.: nervoso, silencioso, enorme..."></textarea></td>
+                  <td><textarea placeholder="Ex.: criou suspense, medo, emoção..."></textarea></td>
+                  <td><textarea placeholder="Justifique com pistas do relato."></textarea></td>
+                </tr>
+                <tr>
+                  <td><strong>Narrador 2</strong></td>
+                  <td><textarea></textarea></td>
+                  <td><textarea></textarea></td>
+                  <td><textarea></textarea></td>
+                </tr>
+                <tr>
+                  <td><strong>Narrador 3</strong></td>
+                  <td><textarea></textarea></td>
+                  <td><textarea></textarea></td>
+                  <td><textarea></textarea></td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <button class="btn yellow no-print" onclick="window.print()">🖨️ Imprimir ficha</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10 -->
+      <section class="slide" data-title="Votação">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Votação justificada</div>
+            <h3>Quem viveu essa história?</h3>
+            <p>Vote somente depois de analisar os adjetivos, os detalhes e a coerência do relato.</p>
+          </div>
+
+          <div class="card span-8">
+            <div class="vote-area">
+              <div class="vote-row">
+                <strong>Narrador 1</strong>
+                <div class="bar-wrap"><div id="bar1" class="bar"></div></div>
+                <button class="btn" onclick="vote(1)">Votar</button>
+              </div>
+              <div class="vote-row">
+                <strong>Narrador 2</strong>
+                <div class="bar-wrap"><div id="bar2" class="bar"></div></div>
+                <button class="btn" onclick="vote(2)">Votar</button>
+              </div>
+              <div class="vote-row">
+                <strong>Narrador 3</strong>
+                <div class="bar-wrap"><div id="bar3" class="bar"></div></div>
+                <button class="btn" onclick="vote(3)">Votar</button>
+              </div>
+            </div>
+
+            <br>
+            <div class="timer-controls">
+              <button class="btn red" onclick="resetVotes()">Zerar votação</button>
+              <button class="btn green" onclick="revealTruth()">Revelar verdadeiro narrador</button>
+            </div>
+
+            <div id="reveal" class="reveal">
+              <h3 id="revealText">O verdadeiro narrador foi...</h3>
+              <p>Agora responda: quais adjetivos ajudaram a construir o sentido do relato?</p>
+            </div>
+          </div>
+
+          <div class="card span-4">
+            <h4>Antes de votar, complete oralmente:</h4>
+            <div class="quote">
+              Eu acredito que o narrador ___ viveu a história porque...
+            </div>
+            <div class="quote">
+              O adjetivo “___” criou efeito de...
+            </div>
+            <div class="form-row">
+              <label>Verdadeiro narrador</label>
+              <select id="trueNarrator">
+                <option value="1">Narrador 1</option>
+                <option value="2">Narrador 2</option>
+                <option value="3">Narrador 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11 -->
+      <section class="slide" data-title="Placar">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Gamificação</div>
+            <h3>Placar dos Detetives da Linguagem</h3>
+            <p>Use os pontos para valorizar participação, escuta e análise. Não precisa virar competição pesada.</p>
+          </div>
+
+          <div class="card span-12">
+            <div class="scoreboard">
+              <div class="score-card">
+                <h4>Detetives dos Adjetivos</h4>
+                <div id="score0" class="score-value">0</div>
+                <div class="score-actions">
+                  <button class="small-btn" onclick="addScore(0,1)">+1</button>
+                  <button class="small-btn" onclick="addScore(0,2)">+2</button>
+                  <button class="small-btn" onclick="addScore(0,3)">+3</button>
+                </div>
+              </div>
+              <div class="score-card">
+                <h4>Investigadores da Memória</h4>
+                <div id="score1" class="score-value">0</div>
+                <div class="score-actions">
+                  <button class="small-btn" onclick="addScore(1,1)">+1</button>
+                  <button class="small-btn" onclick="addScore(1,2)">+2</button>
+                  <button class="small-btn" onclick="addScore(1,3)">+3</button>
+                </div>
+              </div>
+              <div class="score-card">
+                <h4>Júri das Palavras</h4>
+                <div id="score2" class="score-value">0</div>
+                <div class="score-actions">
+                  <button class="small-btn" onclick="addScore(2,1)">+1</button>
+                  <button class="small-btn" onclick="addScore(2,2)">+2</button>
+                  <button class="small-btn" onclick="addScore(2,3)">+3</button>
+                </div>
+              </div>
+              <div class="score-card">
+                <h4>Caçadores de Sentido</h4>
+                <div id="score3" class="score-value">0</div>
+                <div class="score-actions">
+                  <button class="small-btn" onclick="addScore(3,1)">+1</button>
+                  <button class="small-btn" onclick="addScore(3,2)">+2</button>
+                  <button class="small-btn" onclick="addScore(3,3)">+3</button>
+                </div>
+              </div>
+              <div class="score-card">
+                <h4>Equipe Pista Final</h4>
+                <div id="score4" class="score-value">0</div>
+                <div class="score-actions">
+                  <button class="small-btn" onclick="addScore(4,1)">+1</button>
+                  <button class="small-btn" onclick="addScore(4,2)">+2</button>
+                  <button class="small-btn" onclick="addScore(4,3)">+3</button>
+                </div>
+              </div>
+            </div>
+            <br>
+            <button class="btn red" onclick="resetScores()">Zerar placar</button>
+          </div>
+
+          <div class="card span-12">
+            <h4>Como pontuar</h4>
+            <div class="list">
+              <div class="item"><strong>+1</strong> Identificou um adjetivo corretamente.</div>
+              <div class="item"><strong>+2</strong> Explicou o efeito de sentido de um adjetivo.</div>
+              <div class="item"><strong>+2</strong> Fez uma pergunta investigativa respeitosa.</div>
+              <div class="item"><strong>+3</strong> Justificou o voto usando detalhes do relato.</div>
+              <div class="item"><strong>+3</strong> Criou um relato com adjetivos expressivos.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12 -->
+      <section class="slide" data-title="Produção escrita">
+        <div class="grid">
+          <div class="card span-12">
+            <div class="eyebrow">Produto final</div>
+            <h3>Agora é a sua vez: escreva um relato pessoal.</h3>
+            <p>Tema: <strong>Um dia em que aconteceu algo inesquecível.</strong></p>
+          </div>
+
+          <div class="card span-7">
+            <div class="form-row">
+              <label>Título</label>
+              <input placeholder="Dê um título interessante ao seu relato." />
+            </div>
+            <div class="form-row">
+              <label>Meu relato pessoal</label>
+              <textarea style="min-height: 290px;" placeholder="Escreva em 1ª pessoa. Conte quando, onde, o que aconteceu, como você se sentiu e o que aprendeu. Use pelo menos 5 adjetivos."></textarea>
+            </div>
+          </div>
+
+          <div class="card span-5">
+            <h4>Critérios do desafio</h4>
+            <div class="list">
+              <label class="item"><input type="checkbox" /> Escrevi em 1ª pessoa.</label>
+              <label class="item"><input type="checkbox" /> Coloquei tempo e lugar.</label>
+              <label class="item"><input type="checkbox" /> Organizei começo, meio e fim.</label>
+              <label class="item"><input type="checkbox" /> Usei pelo menos 5 adjetivos.</label>
+              <label class="item"><input type="checkbox" /> Mostrei sentimentos ou reflexão.</label>
+            </div>
+            <br>
+            <button class="btn yellow" onclick="openModal('modalRubrica')">Ver rubrica de avaliação</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13 -->
+      <section class="slide" data-title="Fechamento">
+        <div class="hero">
+          <div class="hero-card">
+            <div class="eyebrow">Fechamento</div>
+            <h2>O adjetivo muda o clima da história.</h2>
+            <p class="lead">
+              Quando escolhemos um adjetivo, também escolhemos o efeito que queremos causar no leitor ou ouvinte.
+            </p>
+            <div class="quote">
+              Uma lembrança pode parecer engraçada, assustadora, emocionante ou triste dependendo das palavras escolhidas.
+            </div>
+            <button class="btn yellow" onclick="openModal('modalSaida')">Bilhete de saída</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="floating-help no-print">
+      <button class="btn" onclick="openModal('modalAjuda')">?</button>
+    </div>
+
+    <div id="toast" class="toast">Mensagem</div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="modalPerguntasA" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('modalPerguntasA')">×</button>
+      <h3>Perguntas para a versão A</h3>
+      <div class="list">
+        <div class="item">O texto informa o que aconteceu?</div>
+        <div class="item">Você consegue imaginar bem o parque?</div>
+        <div class="item">O texto mostra sentimentos?</div>
+        <div class="item">Que palavras poderiam deixar a cena mais viva?</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalPerguntasB" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('modalPerguntasB')">×</button>
+      <h3>Adjetivos e efeitos de sentido</h3>
+      <table>
+        <thead>
+          <tr><th>Adjetivo</th><th>Efeito produzido</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ensolarada</td><td>Cria sensação de dia agradável e claro.</td></tr>
+          <tr><td>verdinho</td><td>Ajuda a imaginar o gramado e dá ideia de cuidado/vida.</td></tr>
+          <tr><td>fresco</td><td>Cria sensação física agradável.</td></tr>
+          <tr><td>delicioso</td><td>Mostra opinião e desejo em relação ao lanche.</td></tr>
+          <tr><td>simples</td><td>Mostra que o momento não precisava ser grandioso.</td></tr>
+          <tr><td>inesquecíveis</td><td>Mostra importância afetiva da memória.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modalPrompt" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('modalPrompt')">×</button>
+      <h3>Pergunta investigativa</h3>
+      <div id="promptText" class="quote" style="font-size: 34px;"></div>
+    </div>
+  </div>
+
+  <div id="modalRubrica" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('modalRubrica')">×</button>
+      <h3>Rubrica de avaliação</h3>
+      <div class="rubric">
+        <div class="rubric-row"><span>O texto é um relato pessoal em 1ª pessoa.</span><span>2,0</span></div>
+        <div class="rubric-row"><span>Apresenta começo, meio e fim.</span><span>2,0</span></div>
+        <div class="rubric-row"><span>Usa adjetivos de forma adequada.</span><span>2,0</span></div>
+        <div class="rubric-row"><span>Demonstra sentimentos e/ou reflexão.</span><span>2,0</span></div>
+        <div class="rubric-row"><span>Apresenta clareza, capricho e revisão.</span><span>2,0</span></div>
+        <div class="rubric-row"><span><strong>Total</strong></span><span>10,0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalSaida" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('modalSaida')">×</button>
+      <h3>Bilhete de saída</h3>
+      <p>Antes de terminar, cada aluno responde em uma frase:</p>
+      <div class="quote">
+        Hoje eu aprendi que os adjetivos...
+      </div>
+      <div class="quote">
+        Um adjetivo que mudou o sentido de um relato foi...
+      </div>
+    </div>
+  </div>
+
+  <div id="modalAjuda" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('modalAjuda')">×</button>
+      <h3>Comandos rápidos</h3>
+      <div class="list">
+        <div class="item"><strong>Seta para direita:</strong> avançar tela.</div>
+        <div class="item"><strong>Seta para esquerda:</strong> voltar tela.</div>
+        <div class="item"><strong>F:</strong> tela cheia.</div>
+        <div class="item"><strong>T:</strong> mostrar/ocultar notas do professor.</div>
+        <div class="item"><strong>Esc:</strong> fechar janelas abertas.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let current = 0;
+
+    function showSlide(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      const progress = ((current + 1) / slides.length) * 100;
+      document.getElementById('progress').style.width = progress + '%';
+      document.title = 'Acredite no Relato — ' + (slides[current].dataset.title || '');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function nextSlide() { showSlide(current + 1); }
+    function prevSlide() { showSlide(current - 1); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key.toLowerCase() === 'f') toggleFullscreen();
+      if (e.key.toLowerCase() === 't') toggleTeacher();
+      if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show'));
+    });
+
+    showSlide(0);
+
+
+    function toggleConceptCard(card) {
+      card.classList.toggle('concept-read');
+      toast(card.classList.contains('concept-read') ? 'Conceito marcado em verde!' : 'Conceito desmarcado.');
+    }
+
+    function toggleTeacher() {
+      document.body.classList.toggle('show-teacher');
+      toast(document.body.classList.contains('show-teacher') ? 'Modo professor ativado' : 'Modo professor oculto');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    function showPrompt(text) {
+      document.getElementById('promptText').textContent = text;
+      openModal('modalPrompt');
+      speak(text);
+    }
+
+    function toast(message) {
+      const t = document.getElementById('toast');
+      t.textContent = message;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 1900);
+    }
+
+    function copyStoryStarter() {
+      const starter = 'Eu vou contar um relato pessoal sobre um dia que eu nunca esqueci. Tudo aconteceu...';
+      navigator.clipboard?.writeText(starter);
+      toast('Começo sugerido copiado!');
+    }
+
+    // Banco de adjetivos
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const selected = document.getElementById('selectedWords');
+        const clone = document.createElement('button');
+        clone.className = 'chip';
+        clone.textContent = chip.textContent;
+        clone.onclick = () => clone.remove();
+        selected.appendChild(clone);
+      });
+    });
+
+    function clearSelectedWords() {
+      document.getElementById('selectedWords').innerHTML = '';
+    }
+
+    // Timer
+    let timerSeconds = 60;
+    let timerInitial = 60;
+    let timerInterval = null;
+
+    function renderTimer() {
+      const min = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+      const sec = String(timerSeconds % 60).padStart(2, '0');
+      document.getElementById('timer').textContent = `${min}:${sec}`;
+    }
+
+    function setTimer(seconds) {
+      pauseTimer();
+      timerSeconds = seconds;
+      timerInitial = seconds;
+      renderTimer();
+      toast(`Cronômetro ajustado para ${seconds/60} minuto(s)`);
+    }
+
+    function startTimer() {
+      pauseTimer();
+      timerInterval = setInterval(() => {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          renderTimer();
+        } else {
+          pauseTimer();
+          toast('Tempo encerrado!');
+          speak('Tempo encerrado.');
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      timerSeconds = timerInitial;
+      renderTimer();
+    }
+
+    renderTimer();
+
+    // Votação
+    let votes = [0,0,0];
+
+    function vote(n) {
+      votes[n-1]++;
+      updateVoteBars();
+    }
+
+    function updateVoteBars() {
+      const total = votes.reduce((a,b) => a + b, 0) || 1;
+      for (let i = 1; i <= 3; i++) {
+        const pct = (votes[i-1] / total) * 100;
+        document.getElementById(`bar${i}`).style.width = pct + '%';
+      }
+    }
+
+    function resetVotes() {
+      votes = [0,0,0];
+      updateVoteBars();
+      document.getElementById('reveal').classList.remove('show');
+    }
+
+    function revealTruth() {
+      const n = document.getElementById('trueNarrator').value;
+      document.getElementById('revealText').textContent = `O verdadeiro narrador foi o Narrador ${n}!`;
+      document.getElementById('reveal').classList.add('show');
+      speak(`O verdadeiro narrador foi o Narrador ${n}.`);
+    }
+
+    // Placar
+    let scores = [0,0,0,0,0];
+
+    function addScore(team, points) {
+      scores[team] += points;
+      document.getElementById(`score${team}`).textContent = scores[team];
+    }
+
+    function resetScores() {
+      scores = [0,0,0,0,0];
+      scores.forEach((_, i) => document.getElementById(`score${i}`).textContent = 0);
+      toast('Placar zerado!');
+    }
+
+    // Voz
+    function getBestVoice() {
+      const voices = speechSynthesis.getVoices();
+      return voices.find(v => v.lang === 'pt-BR' && /Google|Microsoft|Daniel|Francisca|Natural/i.test(v.name))
+        || voices.find(v => v.lang === 'pt-BR')
+        || voices.find(v => v.lang.startsWith('pt'))
+        || voices[0];
+    }
+
+    function speak(text) {
+      if (!('speechSynthesis' in window)) {
+        toast('Este navegador não oferece leitura por voz.');
+        return;
+      }
+      speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'pt-BR';
+      utter.rate = 0.95;
+      utter.pitch = 1;
+      const voice = getBestVoice();
+      if (voice) utter.voice = voice;
+      speechSynthesis.speak(utter);
+    }
+
+    function speakCurrent() {
+      const active = slides[current];
+      const title = active.querySelector('h2,h3')?.innerText || 'Aula';
+      const text = Array.from(active.querySelectorAll('p,.quote,.item,h4'))
+        .slice(0, 8)
+        .map(el => el.innerText)
+        .join('. ');
+      speak(title + '. ' + text);
+    }
+
+    if ('speechSynthesis' in window) {
+      speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+    }
+  </script>
+</body>
+</html>
