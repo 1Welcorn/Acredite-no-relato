@@ -1362,6 +1362,150 @@
       display: block;
     }
 
+
+    /* Correção de proporção para GitHub Pages / preview:
+       a aula passa a usar uma área útil responsiva e centralizada,
+       com largura mais estável em telas grandes. */
+    .app {
+      --lesson-width: min(1440px, calc(100vw - 28px));
+    }
+
+    main {
+      max-width: var(--lesson-width);
+    }
+
+    @media (min-width: 1280px) {
+      main {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .topbar {
+        max-width: var(--lesson-width);
+      }
+    }
+
+    body.presentation-fallback {
+      overflow: hidden;
+      background: #020617;
+    }
+
+    body.presentation-fallback header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 200;
+    }
+
+    body.presentation-fallback main {
+      position: fixed;
+      left: 50%;
+      top: 74px;
+      transform: translateX(-50%);
+      width: min(1480px, calc(100vw - 20px));
+      max-width: min(1480px, calc(100vw - 20px));
+      height: calc(100vh - 86px);
+      overflow-y: auto;
+      padding: 18px 10px 40px;
+      z-index: 150;
+    }
+
+    body.presentation-fallback .hero {
+      min-height: calc(100vh - 135px);
+    }
+
+    body.presentation-fallback .slide.active {
+      width: 100%;
+    }
+
+    body.presentation-fallback .fullscreen-card-modal {
+      z-index: 300;
+    }
+
+    body.presentation-fallback .modal {
+      z-index: 320;
+    }
+
+    body.presentation-fallback .floating-help {
+      display: none;
+    }
+
+    .fullscreen-status {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 250;
+      display: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(15,23,42,.92);
+      color: #fef3c7;
+      border: 1px solid rgba(250,204,21,.32);
+      font-weight: 900;
+      box-shadow: 0 14px 34px rgba(0,0,0,.30);
+    }
+
+    body.presentation-fallback .fullscreen-status {
+      display: block;
+    }
+
+
+    .title-inline-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .title-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(250,204,21,.95), rgba(251,191,36,.82));
+      color: #111827;
+      font-weight: 900;
+      letter-spacing: .02em;
+      border: 1px solid rgba(255,255,255,.28);
+      box-shadow: 0 10px 24px rgba(250,204,21,.20);
+      white-space: nowrap;
+    }
+
+    .title-inline-row h3 {
+      margin: 0;
+    }
+
+
+    /* Slide "Como funciona": reduzir cerca de 10% da altura dos cards sem alterar fontes */
+    section[data-title="Como funciona"] .card {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    section[data-title="Como funciona"] .stage {
+      padding-top: 14px;
+      padding-bottom: 14px;
+      margin-bottom: 10px;
+    }
+
+    section[data-title="Como funciona"] .list {
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    section[data-title="Como funciona"] .list .item {
+      padding-top: 13px;
+      padding-bottom: 13px;
+    }
+
+    section[data-title="Como funciona"] .teacher-note {
+      margin-top: 10px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
     @media (max-width: 920px) {
       .formula-main-line {
         white-space: normal;
@@ -1551,6 +1695,22 @@
     }
 
 
+
+    @supports (height: 100dvh) {
+      .hero {
+        min-height: calc(100dvh - 155px);
+      }
+
+      body.presentation-fallback main {
+        height: calc(100dvh - 86px);
+      }
+
+      body.presentation-fallback .hero {
+        min-height: calc(100dvh - 135px);
+      }
+    }
+
+
     @media print {
       body {
         background: white !important;
@@ -1610,7 +1770,7 @@
           <button class="btn primary" onclick="nextSlide()">Avançar →</button>
           <button class="btn" onclick="toggleTeacher()">Modo professor</button>
           <button class="btn" onclick="speakCurrent()">🔊 Ouvir</button>
-          <button class="btn" onclick="toggleFullscreen()">⛶ Tela cheia</button>
+          <button class="btn" onclick="toggleFullscreen()">⛶ Tela cheia / apresentação</button>
         </div>
       </div>
       <div class="progress-wrap"><div id="progress" class="progress"></div></div>
@@ -1766,8 +1926,10 @@
       <section class="slide" data-title="Como funciona">
         <div class="grid">
           <div class="card span-12">
-            <div class="eyebrow">Jogo principal</div>
-            <h3>Como funciona o “Acredite no Relato”?</h3>
+            <div class="title-inline-row">
+              <div class="title-chip">Jogo principal</div>
+              <h3>Como funciona...</h3>
+            </div>
           </div>
 
           <div class="card span-7">
@@ -2207,7 +2369,6 @@
               <div class="item"><strong>+2</strong> Explicou o efeito de sentido de um adjetivo.</div>
               <div class="item"><strong>+2</strong> Fez uma pergunta investigativa respeitosa.</div>
               <div class="item"><strong>+3</strong> Justificou o voto usando detalhes do relato.</div>
-              <div class="item"><strong>+3</strong> Criou um relato com adjetivos expressivos.</div>
             </div>
           </div>
         </div>
@@ -2303,6 +2464,7 @@
       </div>
     </template>
 
+    <div id="fullscreenStatus" class="fullscreen-status">Modo tela cheia visual ativo</div>
     <div id="toast" class="toast">Mensagem</div>
   </div>
 
@@ -2412,7 +2574,7 @@
       if (e.key === 'ArrowLeft') prevSlide();
       if (e.key.toLowerCase() === 'f') toggleFullscreen();
       if (e.key.toLowerCase() === 't') toggleTeacher();
-      if (e.key === 'Escape') { document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show')); setEffectsButtonActive(false); closeFullscreenCard(); }
+      if (e.key === 'Escape') { document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show')); setEffectsButtonActive(false); closeFullscreenCard(); document.body.classList.remove('presentation-fallback'); }
     });
 
     showSlide(0);
@@ -2445,13 +2607,57 @@
       toast(document.body.classList.contains('show-teacher') ? 'Modo professor ativado' : 'Modo professor oculto');
     }
 
-    function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen?.();
-      } else {
-        document.exitFullscreen?.();
+    async function toggleFullscreen() {
+      const root = document.documentElement;
+
+      try {
+        if (!document.fullscreenElement) {
+          const request =
+            root.requestFullscreen ||
+            root.webkitRequestFullscreen ||
+            root.msRequestFullscreen;
+
+          if (request) {
+            await request.call(root);
+            document.body.classList.remove('presentation-fallback');
+            toast('Tela cheia ativada.');
+            return;
+          }
+        } else {
+          const exit =
+            document.exitFullscreen ||
+            document.webkitExitFullscreen ||
+            document.msExitFullscreen;
+
+          if (exit) {
+            await exit.call(document);
+            document.body.classList.remove('presentation-fallback');
+            toast('Tela cheia desativada.');
+            return;
+          }
+        }
+      } catch (error) {
+        // Alguns navegadores, iframes ou configurações bloqueiam o fullscreen real.
       }
+
+      // Modo alternativo: simula tela cheia sem depender da API do navegador.
+      document.body.classList.toggle('presentation-fallback');
+      toast(document.body.classList.contains('presentation-fallback')
+        ? 'Modo tela cheia visual ativado.'
+        : 'Modo tela cheia visual desativado.');
     }
+
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        document.body.classList.remove('presentation-fallback');
+      }
+    });
+
+    document.addEventListener('webkitfullscreenchange', () => {
+      if (!document.webkitFullscreenElement) {
+        document.body.classList.remove('presentation-fallback');
+      }
+    });
 
 
 
