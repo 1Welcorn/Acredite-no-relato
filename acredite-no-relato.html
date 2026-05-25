@@ -2958,6 +2958,50 @@
     }
 
 
+
+    /* Conceitos: fullscreen cerca de 20% menor */
+    .fullscreen-card-modal.concept-modal-mode .fullscreen-card-content {
+      width: min(1200px, 77vw) !important;
+      max-width: 77vw !important;
+      max-height: 70vh !important;
+      padding: 18px !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card {
+      padding: clamp(24px, 2.8vw, 42px) !important;
+      border-radius: 28px !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card h3 {
+      font-size: clamp(34px, 3.5vw, 56px) !important;
+      line-height: 1.05 !important;
+      margin-bottom: 18px !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card .list {
+      gap: 12px !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card .item {
+      font-size: clamp(20px, 1.7vw, 28px) !important;
+      line-height: 1.34 !important;
+      padding: 16px 18px !important;
+      border-radius: 20px !important;
+    }
+
+    section[data-title="Conceitos"] .concept-card {
+      cursor: pointer;
+    }
+
+    section[data-title="Conceitos"] .concept-card:hover {
+      transform: translateY(-2px);
+    }
+
+    section[data-title="Conceitos"] .concept-actions {
+      display: none !important;
+    }
+
+
     @media print {
       body {
         background: white !important;
@@ -3137,7 +3181,7 @@
       <!-- SLIDE 3 -->
       <section class="slide" data-title="Conceitos">
         <div class="grid">
-          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar este conceito em verde">
+          <div class="card span-6 concept-card" onclick="openConceptFullscreen(this)" title="Clique para abrir este conceito em tela cheia">
             <div class="eyebrow">Conceito 1</div>
             <h3>O que é relato pessoal?</h3>
             <div class="list">
@@ -3147,14 +3191,9 @@
               <div class="item"><strong>Sequência:</strong> começo, meio e fim.</div>
               <div class="item"><strong>Sentimentos:</strong> o que a pessoa sentiu ou aprendeu.</div>
             </div>
-            <div class="concept-actions">
-              <button class="btn primary concept-fullscreen-btn" onclick="event.stopPropagation(); openConceptFullscreen(this.closest('.concept-card'))">
-                ⛶ Abrir conceito em tela cheia
-              </button>
-            </div>
-          </div>
+</div>
 
-          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar este conceito em verde">
+          <div class="card span-6 concept-card" onclick="openConceptFullscreen(this)" title="Clique para abrir este conceito em tela cheia">
             <div class="eyebrow">Conceito 2</div>
             <h3>O que os adjetivos fazem?</h3>
             <div class="list">
@@ -3164,12 +3203,7 @@
               <div class="item"><strong>Mostram opinião:</strong> experiência incrível, dia inesquecível.</div>
               <div class="item"><strong>Mudam o sentido:</strong> “silencioso” não causa o mesmo efeito que “barulhento”.</div>
             </div>
-            <div class="concept-actions">
-              <button class="btn primary concept-fullscreen-btn" onclick="event.stopPropagation(); openConceptFullscreen(this.closest('.concept-card'))">
-                ⛶ Abrir conceito em tela cheia
-              </button>
-            </div>
-          </div>
+</div>
 
           <div class="span-12 formula-button-row">
             <button class="btn yellow formula-open-btn" onclick="openFormulaFullscreen()">
@@ -3846,8 +3880,8 @@
 
 
     function toggleConceptCard(card) {
-      card.classList.toggle('concept-read');
-      toast(card.classList.contains('concept-read') ? 'Conceito marcado em verde!' : 'Conceito desmarcado.');
+      // Mantida apenas por compatibilidade.
+      openConceptFullscreen(card);
     }
 
     function openConceptFullscreen(card) {
