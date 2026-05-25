@@ -2807,6 +2807,73 @@
     }
 
 
+
+    /* Correção: cards em full screen não podem ficar transparentes */
+    .fullscreen-card-modal .fullscreen-card-content {
+      background:
+        linear-gradient(135deg, rgba(2,6,23,.98), rgba(15,23,42,.98)) !important;
+      border: 2px solid rgba(255,255,255,.24) !important;
+      box-shadow: 0 24px 70px rgba(0,0,0,.62) !important;
+    }
+
+    .fullscreen-card-modal .fullscreen-card-content .card {
+      background:
+        linear-gradient(135deg, rgba(15,23,42,.98), rgba(30,41,59,.96)) !important;
+      border: 2px solid rgba(255,255,255,.20) !important;
+      box-shadow: 0 18px 46px rgba(0,0,0,.36) !important;
+      color: #f8fafc !important;
+      opacity: 1 !important;
+      backdrop-filter: none !important;
+    }
+
+    .fullscreen-card-modal .fullscreen-card-content .item,
+    .fullscreen-card-modal .fullscreen-card-content .quote,
+    .fullscreen-card-modal .fullscreen-card-content .stage,
+    .fullscreen-card-modal .fullscreen-card-content .teacher-note {
+      background: rgba(255,255,255,.10) !important;
+      border: 1px solid rgba(255,255,255,.16) !important;
+      color: #f8fafc !important;
+      opacity: 1 !important;
+    }
+
+    .fullscreen-card-modal .fullscreen-card-content h3,
+    .fullscreen-card-modal .fullscreen-card-content h4,
+    .fullscreen-card-modal .fullscreen-card-content p,
+    .fullscreen-card-modal .fullscreen-card-content strong,
+    .fullscreen-card-modal .fullscreen-card-content span,
+    .fullscreen-card-modal .fullscreen-card-content li {
+      color: #f8fafc !important;
+      opacity: 1 !important;
+    }
+
+    .fullscreen-card-modal .fullscreen-card-content .eyebrow {
+      color: #fef3c7 !important;
+      opacity: 1 !important;
+    }
+
+    /* Reforço específico para os conceitos em tela cheia */
+    .fullscreen-card-content.concept-fullscreen-mode {
+      background:
+        linear-gradient(135deg, #020617 0%, #0f172a 48%, #111827 100%) !important;
+      border: 2px solid rgba(255,255,255,.28) !important;
+      box-shadow: 0 28px 78px rgba(0,0,0,.68) !important;
+      opacity: 1 !important;
+    }
+
+    .fullscreen-card-content.concept-fullscreen-mode .concept-card {
+      background:
+        linear-gradient(135deg, rgba(15,23,42,1), rgba(30,41,59,1)) !important;
+      border: 2px solid rgba(255,255,255,.24) !important;
+      opacity: 1 !important;
+    }
+
+    .fullscreen-card-content.concept-fullscreen-mode .item {
+      background: rgba(255,255,255,.12) !important;
+      border: 1px solid rgba(255,255,255,.18) !important;
+      opacity: 1 !important;
+    }
+
+
     @media print {
       body {
         background: white !important;
