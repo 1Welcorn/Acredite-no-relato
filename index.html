@@ -2045,6 +2045,297 @@
     }
 
 
+
+    /* Modo apresentação forte: usa quase toda a tela e compacta a barra superior */
+    body.presentation-mode {
+      overflow: hidden;
+      background: #020617;
+    }
+
+    body.presentation-mode header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 220;
+      backdrop-filter: blur(12px);
+    }
+
+    body.presentation-mode .topbar {
+      max-width: none !important;
+      padding: 6px 10px !important;
+      gap: 10px !important;
+    }
+
+    body.presentation-mode .brand {
+      min-width: 0;
+      gap: 10px;
+    }
+
+    body.presentation-mode .logo {
+      width: 34px;
+      height: 34px;
+      font-size: 18px;
+      border-radius: 12px;
+    }
+
+    body.presentation-mode .brand h1 {
+      font-size: 16px;
+    }
+
+    body.presentation-mode .brand span {
+      font-size: 11px;
+    }
+
+    body.presentation-mode .controls {
+      gap: 6px;
+    }
+
+    body.presentation-mode .btn {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    body.presentation-mode .progress-wrap {
+      height: 4px;
+    }
+
+    body.presentation-mode main {
+      position: fixed;
+      left: 50%;
+      top: 54px;
+      transform: translateX(-50%);
+      width: calc(100vw - 4px) !important;
+      max-width: calc(100vw - 4px) !important;
+      height: calc(100dvh - 58px);
+      overflow-y: auto;
+      padding: 8px 8px 18px !important;
+      margin: 0 !important;
+      z-index: 150;
+    }
+
+    body.presentation-mode .slide.active {
+      width: 100%;
+      min-height: calc(100dvh - 74px);
+    }
+
+    body.presentation-mode .grid {
+      gap: 18px;
+    }
+
+    body.presentation-mode .card {
+      padding: 30px;
+      border-radius: 28px;
+    }
+
+    body.presentation-mode h2 {
+      font-size: clamp(60px, 8vw, 112px);
+      line-height: .95;
+    }
+
+    body.presentation-mode h3 {
+      font-size: clamp(42px, 4.6vw, 74px);
+      line-height: 1.02;
+    }
+
+    body.presentation-mode h4 {
+      font-size: clamp(30px, 2.5vw, 44px);
+      line-height: 1.12;
+    }
+
+    body.presentation-mode p {
+      font-size: clamp(24px, 1.95vw, 32px);
+      line-height: 1.46;
+    }
+
+    body.presentation-mode .item {
+      font-size: clamp(21px, 1.7vw, 28px);
+      line-height: 1.34;
+      padding: 18px 18px;
+    }
+
+    body.presentation-mode .quote {
+      font-size: clamp(28px, 2.45vw, 42px);
+      line-height: 1.42;
+      padding: 28px 30px;
+    }
+
+    body.presentation-mode .eyebrow {
+      font-size: 15px;
+      padding: 9px 16px;
+    }
+
+    body.presentation-mode .teacher-note {
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    body.presentation-mode .fullscreen-status {
+      display: block;
+    }
+
+    /* Abertura e Fechamento */
+    body.presentation-mode section[data-title="Abertura"] .hero,
+    body.presentation-mode section[data-title="Fechamento"] .hero {
+      min-height: calc(100dvh - 84px);
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
+    body.presentation-mode section[data-title="Abertura"] .hero-card,
+    body.presentation-mode section[data-title="Fechamento"] .hero-card {
+      width: min(1540px, 99vw);
+      max-width: 99vw;
+      padding: clamp(44px, 6vw, 90px);
+    }
+
+    body.presentation-mode section[data-title="Abertura"] .lead,
+    body.presentation-mode section[data-title="Fechamento"] .lead {
+      max-width: none;
+      font-size: clamp(28px, 2.6vw, 40px);
+    }
+
+    /* A partir da segunda, sem mexer em demasia na página 2 que já estava boa */
+    body.presentation-mode section[data-title="Objetivos"] .grid {
+      gap: 18px;
+    }
+
+    /* Aquecimento: ocupar muito mais área visual */
+    body.presentation-mode section[data-title="Aquecimento"] > .grid {
+      grid-template-rows: auto 1fr auto;
+      min-height: calc(100dvh - 92px);
+    }
+
+    body.presentation-mode section[data-title="Aquecimento"] > .grid > .card.span-12:first-child {
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    body.presentation-mode section[data-title="Aquecimento"] .warmup-version-card {
+      min-height: 420px;
+      padding: 30px;
+    }
+
+    body.presentation-mode section[data-title="Aquecimento"] .warmup-version-card .quote {
+      font-size: clamp(30px, 2.6vw, 44px);
+      line-height: 1.45;
+      padding: 28px 30px;
+    }
+
+    body.presentation-mode section[data-title="Aquecimento"] .warmup-version-card .btn {
+      font-size: clamp(20px, 1.65vw, 27px);
+      padding: 14px 20px;
+    }
+
+    body.presentation-mode section[data-title="Aquecimento"] > .grid > .card.span-12:last-child {
+      min-height: 160px;
+    }
+
+    /* Conceitos */
+    body.presentation-mode section[data-title="Conceitos"] .concept-card.span-6 {
+      min-height: 560px;
+    }
+
+    body.presentation-mode section[data-title="Conceitos"] .concept-card .item {
+      min-height: 88px;
+    }
+
+    body.presentation-mode section[data-title="Conceitos"] .formula-open-btn {
+      font-size: clamp(25px, 2.2vw, 35px);
+      padding: 22px 36px;
+    }
+
+    /* Como funciona */
+    body.presentation-mode section[data-title="Como funciona"] .stage {
+      padding: 20px;
+      grid-template-columns: 82px 1fr;
+      min-height: 120px;
+    }
+
+    body.presentation-mode section[data-title="Como funciona"] .stage .icon {
+      width: 70px;
+      height: 70px;
+      font-size: 34px;
+    }
+
+    /* Preparação / Produção */
+    body.presentation-mode input,
+    body.presentation-mode textarea,
+    body.presentation-mode select {
+      font-size: clamp(20px, 1.6vw, 28px);
+      padding: 16px 18px;
+    }
+
+    /* Banco de adjetivos */
+    body.presentation-mode section[data-title="Banco de Adjetivos"] .chip {
+      font-size: clamp(19px, 1.45vw, 25px);
+      padding: 13px 17px;
+    }
+
+    /* Apresentação */
+    body.presentation-mode section[data-title="Apresentação"] .narrator-number {
+      width: 80px;
+      height: 80px;
+      font-size: 40px;
+    }
+
+    body.presentation-mode section[data-title="Apresentação"] .timer {
+      font-size: clamp(90px, 9.5vw, 140px);
+    }
+
+    /* Perguntas investigativas */
+    body.presentation-mode section[data-title="Perguntas Investigativas"] .prompt-card {
+      min-height: 180px;
+      padding: 28px;
+    }
+
+    body.presentation-mode section[data-title="Perguntas Investigativas"] .prompt-card strong {
+      font-size: clamp(24px, 2vw, 34px);
+    }
+
+    /* Ficha */
+    body.presentation-mode section[data-title="Ficha de investigação"] table,
+    body.presentation-mode section[data-title="Ficha de investigação"] th,
+    body.presentation-mode section[data-title="Ficha de investigação"] td {
+      font-size: clamp(18px, 1.38vw, 24px);
+    }
+
+    /* Votação / Placar */
+    body.presentation-mode section[data-title="Votação"] .vote-row {
+      grid-template-columns: 180px 1fr 145px;
+      padding: 18px;
+    }
+
+    body.presentation-mode section[data-title="Votação"] .vote-row strong {
+      font-size: clamp(21px, 1.7vw, 28px);
+    }
+
+    body.presentation-mode section[data-title="Placar"] .score-value {
+      font-size: clamp(56px, 5.3vw, 84px);
+    }
+
+    @supports not (height: 100dvh) {
+      body.presentation-mode main {
+        height: calc(100vh - 58px);
+      }
+
+      body.presentation-mode .slide.active {
+        min-height: calc(100vh - 74px);
+      }
+
+      body.presentation-mode section[data-title="Abertura"] .hero,
+      body.presentation-mode section[data-title="Fechamento"] .hero {
+        min-height: calc(100vh - 84px);
+      }
+
+      body.presentation-mode section[data-title="Aquecimento"] > .grid {
+        min-height: calc(100vh - 92px);
+      }
+    }
+
+
     @media print {
       body {
         background: white !important;
@@ -2908,7 +3199,7 @@
       if (e.key === 'ArrowLeft') prevSlide();
       if (e.key.toLowerCase() === 'f') toggleFullscreen();
       if (e.key.toLowerCase() === 't') toggleTeacher();
-      if (e.key === 'Escape') { document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show')); setEffectsButtonActive(false); closeFullscreenCard(); document.body.classList.remove('presentation-fallback'); }
+      if (e.key === 'Escape') { document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show')); setEffectsButtonActive(false); closeFullscreenCard(); document.body.classList.remove('presentation-fallback'); document.body.classList.remove('presentation-mode'); }
     });
 
     showSlide(0);
@@ -2953,6 +3244,7 @@
 
           if (request) {
             await request.call(root);
+            document.body.classList.add('presentation-mode');
             document.body.classList.remove('presentation-fallback');
             toast('Tela cheia ativada.');
             return;
@@ -2965,6 +3257,7 @@
 
           if (exit) {
             await exit.call(document);
+            document.body.classList.remove('presentation-mode');
             document.body.classList.remove('presentation-fallback');
             toast('Tela cheia desativada.');
             return;
@@ -2975,8 +3268,11 @@
       }
 
       // Modo alternativo: simula tela cheia sem depender da API do navegador.
-      document.body.classList.toggle('presentation-fallback');
-      toast(document.body.classList.contains('presentation-fallback')
+      const activating = !document.body.classList.contains('presentation-fallback');
+      document.body.classList.toggle('presentation-fallback', activating);
+      document.body.classList.toggle('presentation-mode', activating);
+
+      toast(activating
         ? 'Modo tela cheia visual ativado.'
         : 'Modo tela cheia visual desativado.');
     }
@@ -2984,12 +3280,18 @@
     document.addEventListener('fullscreenchange', () => {
       if (!document.fullscreenElement) {
         document.body.classList.remove('presentation-fallback');
+        document.body.classList.remove('presentation-mode');
+      } else {
+        document.body.classList.add('presentation-mode');
       }
     });
 
     document.addEventListener('webkitfullscreenchange', () => {
       if (!document.webkitFullscreenElement) {
         document.body.classList.remove('presentation-fallback');
+        document.body.classList.remove('presentation-mode');
+      } else {
+        document.body.classList.add('presentation-mode');
       }
     });
 
