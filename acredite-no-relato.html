@@ -339,6 +339,121 @@
       cursor: help;
     }
 
+
+    .warmup-version-card {
+      min-height: 250px;
+      padding: 18px;
+      cursor: zoom-in;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .warmup-version-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.15);
+      border-color: rgba(250,204,21,.42);
+      box-shadow: 0 18px 38px rgba(0,0,0,.22);
+    }
+
+    .warmup-version-card .quote {
+      font-size: 18px;
+      line-height: 1.42;
+      padding: 15px 16px;
+      margin: 10px 0;
+    }
+
+    .warmup-version-card h4 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .warmup-version-card .big-letter {
+      width: 46px;
+      height: 46px;
+      font-size: 25px;
+      border-radius: 15px;
+    }
+
+    .warmup-version-card .btn {
+      padding: 9px 12px;
+      font-size: 14px;
+    }
+
+    .fullscreen-card-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(56,189,248,.22), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(250,204,21,.22), transparent 30%),
+        rgba(2,6,23,.90);
+      z-index: 80;
+      padding: 22px;
+    }
+
+    .fullscreen-card-modal.show {
+      display: grid;
+      animation: fadeIn .22s ease both;
+    }
+
+    .fullscreen-card-content {
+      width: min(1120px, 96vw);
+      min-height: min(680px, 82vh);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 34px;
+      padding: clamp(26px, 4vw, 48px);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08)),
+        linear-gradient(135deg, rgba(15,23,42,.98), rgba(30,41,59,.98));
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: var(--shadow);
+      cursor: default;
+      position: relative;
+    }
+
+    .fullscreen-card-content .quote {
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.48;
+      padding: 26px 30px;
+    }
+
+    .fullscreen-card-content h4 {
+      font-size: clamp(30px, 4vw, 52px);
+      margin-bottom: 18px;
+    }
+
+    .fullscreen-card-content .big-letter {
+      width: 68px;
+      height: 68px;
+      font-size: 38px;
+      border-radius: 22px;
+    }
+
+    .fullscreen-hint {
+      margin-top: 10px;
+      color: #fef3c7;
+      font-weight: 800;
+      font-size: 13px;
+      opacity: .9;
+    }
+
+    .fullscreen-close {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 90;
+      border: 1px solid rgba(255,255,255,.20);
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: rgba(15,23,42,.92);
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0,0,0,.30);
+    }
+
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -820,6 +935,454 @@
       border: 1px solid rgba(167,243,208,.35);
     }
 
+
+    .fullscreen-card-content .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      margin-top: 18px;
+      padding: 15px 22px;
+      font-size: 22px;
+      border-radius: 999px;
+    }
+
+    .fullscreen-card-content p,
+    .fullscreen-card-content .item {
+      font-size: 25px;
+      line-height: 1.45;
+    }
+
+    .modal {
+      z-index: 130;
+    }
+
+    .modal-card {
+      width: min(1160px, 96vw);
+      padding: clamp(30px, 4vw, 52px);
+    }
+
+    .modal-card h3 {
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.02;
+      margin-bottom: 24px;
+    }
+
+    .modal-card p {
+      font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.45;
+    }
+
+    .modal-card .item {
+      font-size: clamp(24px, 2.5vw, 34px);
+      line-height: 1.35;
+      padding: 22px 24px;
+      border-radius: 24px;
+    }
+
+    .modal-card table {
+      font-size: clamp(21px, 2.1vw, 30px);
+    }
+
+    .modal-card th,
+    .modal-card td {
+      padding: 20px 22px;
+      line-height: 1.32;
+    }
+
+    .modal-card .quote {
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height: 1.38;
+      padding: 28px 32px;
+    }
+
+    .modal-card .close,
+    .close {
+      width: 58px;
+      height: 58px;
+      font-size: 34px;
+    }
+
+
+    .warmup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .warmup-reveal-effect-btn {
+      display: none;
+    }
+
+    body.adjectives-revealed .warmup-reveal-effect-btn {
+      display: inline-flex;
+    }
+
+    .warmup-adj-version {
+      display: none;
+    }
+
+    body.adjectives-revealed .warmup-adj-version {
+      display: block;
+    }
+
+    body.adjectives-revealed .warmup-hidden-version {
+      display: none;
+    }
+
+    body.adjectives-revealed .warmup-show-adj-btn {
+      background: linear-gradient(135deg, #10b981, #22c55e);
+      color: #ffffff;
+    }
+
+    .fullscreen-card-content .warmup-actions {
+      margin-top: 22px;
+      gap: 14px;
+    }
+
+    .fullscreen-card-content .warmup-reveal-effect-btn,
+    .fullscreen-card-content .warmup-show-adj-btn {
+      font-size: clamp(22px, 2.4vw, 32px);
+      padding: 16px 24px;
+    }
+
+
+    .modal-effects-card table {
+      font-size: clamp(24px, 2.6vw, 38px);
+    }
+
+    .modal-effects-card th {
+      font-size: clamp(22px, 2.3vw, 34px);
+    }
+
+    .modal-effects-card td:first-child {
+      color: #fef08a;
+      font-weight: 900;
+      width: 28%;
+    }
+
+
+    .modal-effects-card {
+      width: min(1380px, 99vw);
+      padding-left: clamp(24px, 3vw, 44px);
+      padding-right: clamp(24px, 3vw, 44px);
+    }
+
+    .modal-effects-card table {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .modal-effects-card th:first-child,
+    .modal-effects-card td:first-child {
+      width: 20%;
+    }
+
+    .modal-effects-card th:last-child,
+    .modal-effects-card td:last-child {
+      width: 80%;
+    }
+
+    .modal-effects-card td {
+      white-space: nowrap;
+      font-size: clamp(21px, 2vw, 30px);
+    }
+
+    .modal-effects-card th {
+      white-space: nowrap;
+    }
+
+
+    .warmup-reveal-effect-btn {
+      background: rgba(255,255,255,.12);
+      color: var(--text);
+      border-color: rgba(255,255,255,.14);
+    }
+
+    .warmup-reveal-effect-btn.effects-active {
+      background: linear-gradient(135deg, #10b981, #22c55e);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 14px 30px rgba(16,185,129,.24);
+    }
+
+
+    .fullscreen-card-content .concept-card {
+      cursor: default;
+      transform: none !important;
+      width: 100%;
+    }
+
+    .fullscreen-card-content .concept-card::after {
+      font-size: 22px;
+      margin-top: 22px;
+    }
+
+    .fullscreen-card-content .concept-card .list {
+      gap: 16px;
+    }
+
+    .fullscreen-card-content .concept-card .item {
+      font-size: clamp(24px, 2.4vw, 34px);
+      padding: 20px 24px;
+      border-radius: 24px;
+    }
+
+
+    .formula-card {
+      min-height: 540px;
+      padding: 34px;
+    }
+
+    .formula-card .quote {
+      font-size: clamp(23px, 2.4vw, 34px);
+      line-height: 1.45;
+      margin-bottom: 18px;
+    }
+
+    .formula-breakdown {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .formula-part {
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 230px;
+    }
+
+    .formula-part strong {
+      display: block;
+      color: #fef08a;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .formula-part span {
+      color: #e2e8f0;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .fullscreen-card-content .formula-card {
+      min-height: 1116px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .fullscreen-card-content .formula-breakdown {
+      gap: 20px;
+      margin-top: 26px;
+    }
+
+    .fullscreen-card-content .formula-part {
+      min-height: 343px;
+      padding: 32px;
+      border-radius: 28px;
+    }
+
+    .fullscreen-card-content .formula-part strong {
+      font-size: clamp(28px, 3vw, 42px);
+    }
+
+    .fullscreen-card-content .formula-part span {
+      font-size: clamp(24px, 2.4vw, 34px);
+      line-height: 1.35;
+    }
+@media (max-width: 920px) {
+}
+
+
+    /* Ajuste: cards da página de Conceitos 20% mais compridos */
+    section[data-title="Conceitos"] > .grid > .concept-card.span-6 {
+      min-height: 480px;
+      padding-top: 28px;
+      padding-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    section[data-title="Conceitos"] > .grid > .concept-card.span-6 .list {
+      flex: 1;
+      align-content: stretch;
+    }
+
+    section[data-title="Conceitos"] > .grid > .concept-card.span-6 .item {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+    }
+
+    section[data-title="Conceitos"] > .grid > .formula-card {
+      min-height: 648px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    section[data-title="Conceitos"] > .grid > .formula-card .formula-part {
+      min-height: 276px;
+    }
+
+
+    /* Ajuste de largura da página de Conceitos:
+       aumenta os cards para os dois lados, mantendo a grade centralizada. */
+    section[data-title="Conceitos"] > .grid {
+      width: 114%;
+      margin-left: -7%;
+      margin-right: -7%;
+    }
+
+    @media (max-width: 1200px) {
+      section[data-title="Conceitos"] > .grid {
+        width: 108%;
+        margin-left: -4%;
+        margin-right: -4%;
+      }
+    }
+
+
+    .formula-button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 0 20px;
+    }
+
+    .formula-open-btn {
+      font-size: clamp(20px, 2.1vw, 30px);
+      padding: 18px 30px;
+      box-shadow: 0 16px 36px rgba(250,204,21,.20);
+    }
+
+    .fullscreen-card-content .formula-fullscreen-template {
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+      min-height: 0;
+      cursor: default;
+    }
+
+    .fullscreen-card-content .formula-fullscreen-template::after {
+      display: none;
+    }
+
+    .fullscreen-card-content .formula-fullscreen-template h4 {
+      font-size: clamp(40px, 5vw, 72px);
+      margin-bottom: 24px;
+    }
+
+    .fullscreen-card-content .formula-fullscreen-template .quote {
+      font-size: clamp(28px, 3vw, 46px);
+      line-height: 1.35;
+    }
+
+    .fullscreen-card-content .formula-fullscreen-template .formula-breakdown {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .fullscreen-card-content .formula-fullscreen-template .formula-part {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+
+    .fullscreen-card-content.formula-wide-mode {
+      width: min(1480px, 98vw);
+      max-width: 98vw;
+      padding-left: clamp(22px, 2.4vw, 34px);
+      padding-right: clamp(22px, 2.4vw, 34px);
+    }
+
+    .fullscreen-card-content.formula-wide-mode .formula-fullscreen-template .formula-breakdown {
+      gap: 18px;
+    }
+
+    .fullscreen-card-content.formula-wide-mode .formula-fullscreen-template .formula-part {
+      min-height: 240px;
+    }
+
+
+    .formula-main-line {
+      display: inline-block;
+      font-size: clamp(22px, 2vw, 34px);
+      white-space: nowrap;
+    }
+
+
+    .true-narrator-panel {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(15,23,42,.35);
+      border: 1px solid rgba(255,255,255,.13);
+    }
+
+    .confirm-answer-btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .true-narrator-hidden {
+      display: none;
+      text-align: center;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(15,23,42,.65);
+      border: 1px solid rgba(250,204,21,.35);
+      color: #fef3c7;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .hidden-change-btn {
+      display: none;
+      width: 100%;
+      margin-top: 10px;
+      opacity: .85;
+    }
+
+    .true-narrator-panel.answer-confirmed #trueNarratorSetup {
+      display: none;
+    }
+
+    .true-narrator-panel.answer-confirmed .true-narrator-hidden,
+    .true-narrator-panel.answer-confirmed .hidden-change-btn {
+      display: block;
+    }
+
+    @media (max-width: 920px) {
+      .formula-main-line {
+        white-space: normal;
+        font-size: clamp(20px, 3.2vw, 28px);
+      }
+    }
+
+    @media (max-width: 920px) {
+      section[data-title="Conceitos"] > .grid {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .formula-breakdown {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 920px) {
       .grid, .two-col {
         grid-template-columns: 1fr;
@@ -844,6 +1407,149 @@
         min-height: auto;
       }
     }
+
+
+    body.print-ficha-mode header,
+    body.print-ficha-mode .floating-help,
+    body.print-ficha-mode .modal,
+    body.print-ficha-mode .toast,
+    body.print-ficha-mode .no-print,
+    body.print-ficha-mode .slide,
+    body.print-ficha-mode .hero,
+    body.print-ficha-mode .controls {
+      display: none !important;
+    }
+
+    body.print-ficha-mode {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    body.print-ficha-mode main {
+      padding: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      width: 100% !important;
+    }
+
+    body.print-ficha-mode .slide[data-title="Ficha de investigação"] {
+      display: block !important;
+      background: #ffffff !important;
+      color: #000000 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    body.print-ficha-mode .slide[data-title="Ficha de investigação"] > .grid {
+      display: block !important;
+      width: 100% !important;
+    }
+
+    body.print-ficha-mode .slide[data-title="Ficha de investigação"] .card:not(.ficha-print-card),
+    body.print-ficha-mode .slide[data-title="Ficha de investigação"] .eyebrow,
+    body.print-ficha-mode .slide[data-title="Ficha de investigação"] .btn,
+    body.print-ficha-mode .slide[data-title="Ficha de investigação"] p {
+      display: none !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card {
+      display: block !important;
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 2px solid #000000 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 18px !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card h4,
+    body.print-ficha-mode .ficha-print-card strong,
+    body.print-ficha-mode .ficha-print-card label,
+    body.print-ficha-mode .ficha-print-card th,
+    body.print-ficha-mode .ficha-print-card td,
+    body.print-ficha-mode .ficha-print-card textarea,
+    body.print-ficha-mode .ficha-print-card input {
+      color: #000000 !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      background: #ffffff !important;
+      table-layout: fixed;
+    }
+
+    body.print-ficha-mode .ficha-print-card thead,
+    body.print-ficha-mode .ficha-print-card tbody,
+    body.print-ficha-mode .ficha-print-card tr {
+      display: table-row-group;
+    }
+
+    body.print-ficha-mode .ficha-print-card tr {
+      display: table-row !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card th,
+    body.print-ficha-mode .ficha-print-card td {
+      border: 1.8px solid #000000 !important;
+      background: #ffffff !important;
+      padding: 10px !important;
+      vertical-align: top !important;
+      text-align: left !important;
+      font-size: 13px !important;
+      line-height: 1.3 !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card th {
+      font-weight: 700 !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card textarea,
+    body.print-ficha-mode .ficha-print-card input {
+      width: 100% !important;
+      min-height: 88px !important;
+      border: 1.2px solid #000000 !important;
+      background: #ffffff !important;
+      border-radius: 0 !important;
+      padding: 6px !important;
+      box-shadow: none !important;
+      resize: none !important;
+      font-size: 12px !important;
+      line-height: 1.25 !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card td:first-child {
+      width: 16% !important;
+      font-weight: 700 !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card td:nth-child(2) {
+      width: 26% !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card td:nth-child(3) {
+      width: 24% !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card td:nth-child(4) {
+      width: 34% !important;
+    }
+
+    body.print-ficha-mode .ficha-print-card br {
+      display: none !important;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
 
     @media print {
       body {
@@ -980,7 +1686,7 @@
             <p>Leia as duas versões e peça que a turma observe quais palavras deixam a cena mais viva.</p>
           </div>
 
-          <div class="card span-6 versao">
+          <div class="card span-6 versao warmup-version-card" onclick="openFullscreenCard(this)">
             <div>
               <h4><span class="big-letter">A</span>Versão simples</h4>
               <div class="quote">
@@ -988,20 +1694,27 @@
                 Depois voltamos para casa.
               </div>
             </div>
-            <button class="btn" onclick="openModal('modalPerguntasA')">Perguntas para a turma</button>
+            <div class="warmup-actions"><button class="btn" onclick="event.stopPropagation(); openModal('modalPerguntasA')">Perguntas para a turma</button></div>
           </div>
 
-          <div class="card span-6 versao">
+          <div class="card span-6 versao warmup-version-card" onclick="openFullscreenCard(this)">
             <div>
-              <h4><span class="big-letter">B</span>Versão com adjetivos</h4>
-              <div class="quote">
+              <h4><span class="big-letter">B</span>Versão revelada em etapas</h4>
+              <div class="quote warmup-hidden-version">
+                Eu fui ao parque com minha família. O gramado estava diferente, o vento batia no rosto
+                e o lanche chamou minha atenção. Foi um daqueles dias que ficaram na memória.
+              </div>
+              <div class="quote warmup-adj-version">
                 Eu fui ao parque com minha família em uma manhã <span class="adj">ensolarada</span>.
                 O gramado estava <span class="adj">verdinho</span>, o vento era <span class="adj">fresco</span>
                 e o lanche parecia <span class="adj">delicioso</span>. Foi um daqueles dias
                 <span class="adj">simples</span>, mas <span class="adj">inesquecíveis</span>.
               </div>
             </div>
-            <button class="btn yellow" onclick="openModal('modalPerguntasB')">Ver adjetivos e efeitos</button>
+            <div class="warmup-actions">
+              <button class="btn yellow warmup-show-adj-btn" onclick="event.stopPropagation(); revealAdjectiveVersion()" title="Clique para mostrar ou ocultar os adjetivos">Versão com adjetivos</button>
+              <button class="btn warmup-reveal-effect-btn" onclick="event.stopPropagation(); openEffectsModal()">Ver efeitos dos adjetivos</button>
+            </div>
           </div>
 
           <div class="card span-12">
@@ -1017,7 +1730,7 @@
       <!-- SLIDE 3 -->
       <section class="slide" data-title="Conceitos">
         <div class="grid">
-          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar este conceito em verde">
+          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar e ampliar este conceito em tela cheia">
             <div class="eyebrow">Conceito 1</div>
             <h3>O que é relato pessoal?</h3>
             <div class="list">
@@ -1029,7 +1742,7 @@
             </div>
           </div>
 
-          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar este conceito em verde">
+          <div class="card span-6 concept-card" onclick="toggleConceptCard(this)" title="Clique para marcar e ampliar este conceito em tela cheia">
             <div class="eyebrow">Conceito 2</div>
             <h3>O que os adjetivos fazem?</h3>
             <div class="list">
@@ -1041,13 +1754,10 @@
             </div>
           </div>
 
-          <div class="card span-12">
-            <h4>Fórmula de análise</h4>
-            <div class="quote">
-              Adjetivo usado + elemento caracterizado + efeito no leitor/ouvinte.
-              <br>
-              Exemplo: <strong>auditório enorme</strong> → faz o lugar parecer intimidador.
-            </div>
+          <div class="span-12 formula-button-row">
+            <button class="btn yellow formula-open-btn" onclick="openFormulaFullscreen()">
+              ✨ Abrir fórmula de análise em tela cheia
+            </button>
           </div>
         </div>
       </section>
@@ -1316,8 +2026,8 @@
             <p>O voto precisa ser baseado em linguagem: detalhes, coerência, sentimentos e efeitos de sentido dos adjetivos.</p>
           </div>
 
-          <div class="card span-12 print-target">
-            <h4>Registro da turma</h4>
+          <div class="card span-12 print-target ficha-print-card">
+            <h4>Ficha de investigação — Registro da turma</h4>
             <table>
               <thead>
                 <tr>
@@ -1349,7 +2059,7 @@
               </tbody>
             </table>
             <br>
-            <button class="btn yellow no-print" onclick="window.print()">🖨️ Imprimir ficha</button>
+            <button class="btn yellow no-print" onclick="printFicha()">🖨️ Imprimir ficha</button>
           </div>
         </div>
       </section>
@@ -1402,13 +2112,28 @@
             <div class="quote">
               O adjetivo “___” criou efeito de...
             </div>
-            <div class="form-row">
-              <label>Verdadeiro narrador</label>
-              <select id="trueNarrator">
-                <option value="1">Narrador 1</option>
-                <option value="2">Narrador 2</option>
-                <option value="3">Narrador 3</option>
-              </select>
+            <div class="form-row true-narrator-panel">
+              <label>Definir verdadeiro narrador</label>
+
+              <div id="trueNarratorSetup">
+                <select id="trueNarrator">
+                  <option value="1">Narrador 1</option>
+                  <option value="2">Narrador 2</option>
+                  <option value="3">Narrador 3</option>
+                </select>
+
+                <button class="btn yellow confirm-answer-btn" onclick="confirmTrueNarrator()">
+                  Confirmar verdadeiro narrador
+                </button>
+              </div>
+
+              <div id="trueNarratorHidden" class="true-narrator-hidden">
+                🔒 Resposta guardada
+              </div>
+
+              <button id="changeTrueNarratorBtn" class="btn hidden-change-btn" onclick="changeTrueNarrator()">
+                Alterar resposta
+              </button>
             </div>
           </div>
         </div>
@@ -1545,6 +2270,39 @@
       <button class="btn" onclick="openModal('modalAjuda')">?</button>
     </div>
 
+
+    <div id="fullscreenCardModal" class="fullscreen-card-modal" onclick="closeFullscreenCard()">
+      <button class="fullscreen-close" onclick="event.stopPropagation(); closeFullscreenCard()">×</button>
+      <div id="fullscreenCardContent" class="fullscreen-card-content" onclick="event.stopPropagation()"></div>
+    </div>
+
+
+    <template id="formulaFullscreenTemplate">
+      <div class="card concept-card formula-card formula-fullscreen-template">
+        <h4>Fórmula de análise</h4>
+        <div class="quote">
+          Para analisar um adjetivo, pense em três passos:
+          <br>
+          <span class="formula-main-line"><strong>adjetivo usado</strong> + <strong>o que ele caracteriza</strong> + <strong>efeito produzido no leitor/ouvinte</strong>.</span>
+        </div>
+
+        <div class="formula-breakdown">
+          <div class="formula-part">
+            <strong>1. Adjetivo usado</strong>
+            <span>Qual palavra está dando uma característica? Exemplo: <strong>enorme</strong>.</span>
+          </div>
+          <div class="formula-part">
+            <strong>2. O que ele caracteriza?</strong>
+            <span>Que pessoa, lugar, objeto ou situação recebeu essa característica? Exemplo: <strong>auditório</strong>.</span>
+          </div>
+          <div class="formula-part">
+            <strong>3. Efeito de sentido</strong>
+            <span>Que sensação essa escolha cria? Exemplo: o auditório parece <strong>intimidador</strong>.</span>
+          </div>
+        </div>
+      </div>
+    </template>
+
     <div id="toast" class="toast">Mensagem</div>
   </div>
 
@@ -1563,9 +2321,9 @@
   </div>
 
   <div id="modalPerguntasB" class="modal">
-    <div class="modal-card">
+    <div class="modal-card modal-effects-card">
       <button class="close" onclick="closeModal('modalPerguntasB')">×</button>
-      <h3>Adjetivos e efeitos de sentido</h3>
+      <h3>Efeitos de sentido dos adjetivos</h3>
       <table>
         <thead>
           <tr><th>Adjetivo</th><th>Efeito produzido</th></tr>
@@ -1586,7 +2344,7 @@
     <div class="modal-card">
       <button class="close" onclick="closeModal('modalPrompt')">×</button>
       <h3>Pergunta investigativa</h3>
-      <div id="promptText" class="quote" style="font-size: 34px;"></div>
+      <div id="promptText" class="quote" style="font-size: clamp(42px, 5vw, 72px); line-height: 1.22;"></div>
     </div>
   </div>
 
@@ -1654,7 +2412,7 @@
       if (e.key === 'ArrowLeft') prevSlide();
       if (e.key.toLowerCase() === 'f') toggleFullscreen();
       if (e.key.toLowerCase() === 't') toggleTeacher();
-      if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show'));
+      if (e.key === 'Escape') { document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show')); setEffectsButtonActive(false); closeFullscreenCard(); }
     });
 
     showSlide(0);
@@ -1663,6 +2421,23 @@
     function toggleConceptCard(card) {
       card.classList.toggle('concept-read');
       toast(card.classList.contains('concept-read') ? 'Conceito marcado em verde!' : 'Conceito desmarcado.');
+      openFullscreenCard(card);
+    }
+
+
+    function printFicha() {
+      document.body.classList.add('print-ficha-mode');
+
+      const finish = () => {
+        document.body.classList.remove('print-ficha-mode');
+        window.removeEventListener('afterprint', finish);
+      };
+
+      window.addEventListener('afterprint', finish);
+
+      setTimeout(() => {
+        window.print();
+      }, 120);
     }
 
     function toggleTeacher() {
@@ -1678,18 +2453,103 @@
       }
     }
 
+
+
+    function revealAdjectiveVersion() {
+      const willReveal = !document.body.classList.contains('adjectives-revealed');
+
+      document.body.classList.toggle('adjectives-revealed', willReveal);
+
+      if (!willReveal) {
+        setEffectsButtonActive(false);
+        const effectsModal = document.getElementById('modalPerguntasB');
+        if (effectsModal) effectsModal.classList.remove('show');
+      }
+
+      toast(willReveal ? 'Versão com adjetivos revelada!' : 'Adjetivos ocultados. Texto voltou à versão anterior.');
+
+      const fullModal = document.getElementById('fullscreenCardModal');
+      const fullContent = document.getElementById('fullscreenCardContent');
+
+      if (fullModal && fullModal.classList.contains('show') && fullContent) {
+        const source = document.querySelector('.warmup-version-card .warmup-adj-version')?.closest('.warmup-version-card');
+
+        if (source && (fullContent.querySelector('.warmup-adj-version') || fullContent.querySelector('.warmup-hidden-version'))) {
+          const clone = source.cloneNode(true);
+          clone.removeAttribute('onclick');
+          clone.classList.remove('span-6', 'warmup-version-card');
+          clone.style.background = 'transparent';
+          clone.style.border = '0';
+          clone.style.boxShadow = 'none';
+          clone.style.padding = '0';
+          clone.style.cursor = 'default';
+          clone.querySelectorAll('.fullscreen-hint').forEach(el => el.remove());
+          fullContent.innerHTML = '';
+          fullContent.appendChild(clone);
+        }
+      }
+    }
+
+
+    function openFormulaFullscreen() {
+      const template = document.getElementById('formulaFullscreenTemplate');
+      const content = document.getElementById('fullscreenCardContent');
+      if (!template || !content) return;
+
+      content.classList.add('formula-wide-mode');
+      content.innerHTML = '';
+      content.appendChild(template.content.cloneNode(true));
+      document.getElementById('fullscreenCardModal').classList.add('show');
+    }
+
+    function openFullscreenCard(card) {
+      const content = document.getElementById('fullscreenCardContent');
+      content.classList.remove('formula-wide-mode');
+      const clone = card.cloneNode(true);
+      clone.removeAttribute('onclick');
+      clone.classList.remove('span-6', 'warmup-version-card');
+      clone.style.background = 'transparent';
+      clone.style.border = '0';
+      clone.style.boxShadow = 'none';
+      clone.style.padding = '0';
+      clone.style.cursor = 'default';
+      clone.querySelectorAll('.fullscreen-hint').forEach(el => el.remove());
+      content.innerHTML = '';
+      content.appendChild(clone);
+      document.getElementById('fullscreenCardModal').classList.add('show');
+    }
+
+    function closeFullscreenCard() {
+      document.getElementById('fullscreenCardModal').classList.remove('show');
+      document.getElementById('fullscreenCardContent').classList.remove('formula-wide-mode');
+    }
+
+
+    function setEffectsButtonActive(isActive) {
+      document.querySelectorAll('.warmup-reveal-effect-btn').forEach(btn => {
+        btn.classList.toggle('effects-active', isActive);
+      });
+    }
+
+    function openEffectsModal() {
+      setEffectsButtonActive(true);
+      openModal('modalPerguntasB');
+    }
+
     function openModal(id) {
       document.getElementById(id).classList.add('show');
     }
 
     function closeModal(id) {
       document.getElementById(id).classList.remove('show');
+      if (id === 'modalPerguntasB') {
+        setEffectsButtonActive(false);
+      }
     }
 
     function showPrompt(text) {
       document.getElementById('promptText').textContent = text;
       openModal('modalPrompt');
-      speak(text);
     }
 
     function toast(message) {
@@ -1770,6 +2630,29 @@
     // Votação
     let votes = [0,0,0];
 
+
+    let trueNarratorConfirmed = false;
+
+    function confirmTrueNarrator() {
+      const panel = document.querySelector('.true-narrator-panel');
+      if (!panel) return;
+
+      trueNarratorConfirmed = true;
+      panel.classList.add('answer-confirmed');
+      toast('Resposta guardada. O narrador correto está escondido.');
+    }
+
+    function changeTrueNarrator() {
+      const panel = document.querySelector('.true-narrator-panel');
+      if (!panel) return;
+
+      trueNarratorConfirmed = false;
+      panel.classList.remove('answer-confirmed');
+      document.getElementById('reveal').classList.remove('show');
+      toast('Agora você pode alterar o verdadeiro narrador.');
+    }
+
+
     function vote(n) {
       votes[n-1]++;
       updateVoteBars();
@@ -1790,6 +2673,11 @@
     }
 
     function revealTruth() {
+      if (!trueNarratorConfirmed) {
+        toast('Antes, confirme o verdadeiro narrador para esconder a resposta.');
+        return;
+      }
+
       const n = document.getElementById('trueNarrator').value;
       document.getElementById('revealText').textContent = `O verdadeiro narrador foi o Narrador ${n}!`;
       document.getElementById('reveal').classList.add('show');
