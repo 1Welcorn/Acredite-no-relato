@@ -2336,6 +2336,119 @@
     }
 
 
+
+    /* Página 2 / Objetivos: reduzir 10% da altura apenas em tela cheia */
+    body.presentation-mode section[data-title="Objetivos"] .grid {
+      gap: 16px;
+    }
+
+    body.presentation-mode section[data-title="Objetivos"] .card {
+      padding-top: 25px;
+      padding-bottom: 25px;
+    }
+
+    body.presentation-mode section[data-title="Objetivos"] .mission-number {
+      width: 54px;
+      height: 54px;
+      font-size: 25px;
+      margin-bottom: 13px;
+    }
+
+    body.presentation-mode section[data-title="Objetivos"] h3 {
+      margin-bottom: 7px;
+    }
+
+    body.presentation-mode section[data-title="Objetivos"] h4 {
+      margin-bottom: 9px;
+    }
+
+    body.presentation-mode section[data-title="Objetivos"] p {
+      line-height: 1.36;
+    }
+
+    body.presentation-mode section[data-title="Objetivos"] .quote {
+      padding-top: 21px;
+      padding-bottom: 21px;
+      line-height: 1.38;
+      margin-top: 12px;
+    }
+
+
+
+    /* Ficha de investigação: aumentar cerca de 10% */
+    section[data-title="Ficha de investigação"] .card {
+      padding: 30px;
+    }
+
+    section[data-title="Ficha de investigação"] h3,
+    section[data-title="Ficha de investigação"] h4 {
+      transform: scale(1.03);
+      transform-origin: left center;
+    }
+
+    section[data-title="Ficha de investigação"] table,
+    section[data-title="Ficha de investigação"] th,
+    section[data-title="Ficha de investigação"] td {
+      font-size: clamp(18px, 1.15vw, 22px);
+    }
+
+    section[data-title="Ficha de investigação"] th,
+    section[data-title="Ficha de investigação"] td {
+      padding: 14px;
+    }
+
+    section[data-title="Ficha de investigação"] textarea,
+    section[data-title="Ficha de investigação"] input {
+      min-height: 112px;
+      font-size: clamp(18px, 1.1vw, 21px);
+      padding: 14px 16px;
+    }
+
+    /* Em tela cheia/apresentação */
+    body.presentation-mode section[data-title="Ficha de investigação"] .card {
+      padding: 34px;
+    }
+
+    body.presentation-mode section[data-title="Ficha de investigação"] table,
+    body.presentation-mode section[data-title="Ficha de investigação"] th,
+    body.presentation-mode section[data-title="Ficha de investigação"] td {
+      font-size: clamp(20px, 1.52vw, 26px);
+    }
+
+    body.presentation-mode section[data-title="Ficha de investigação"] th,
+    body.presentation-mode section[data-title="Ficha de investigação"] td {
+      padding: 16px;
+    }
+
+    body.presentation-mode section[data-title="Ficha de investigação"] textarea,
+    body.presentation-mode section[data-title="Ficha de investigação"] input {
+      min-height: 124px;
+      font-size: clamp(19px, 1.32vw, 24px);
+      padding: 16px 18px;
+    }
+
+
+
+    /* Votação justificada: aumentar espaço dos rótulos Narrador 1, 2 e 3 */
+    section[data-title="Votação"] .vote-row {
+      grid-template-columns: 210px 1fr 130px;
+    }
+
+    section[data-title="Votação"] .vote-row strong {
+      font-size: clamp(20px, 1.4vw, 26px);
+      white-space: nowrap;
+    }
+
+    body.presentation-mode section[data-title="Votação"] .vote-row {
+      grid-template-columns: 260px 1fr 160px;
+    }
+
+    body.presentation-mode section[data-title="Votação"] .vote-row strong {
+      font-size: clamp(24px, 1.9vw, 34px);
+      white-space: nowrap;
+    }
+
+
     @media print {
       body {
         background: white !important;
