@@ -2874,6 +2874,90 @@
     }
 
 
+
+    /* Deploy/GitHub fix: modal full screen totalmente opaco e isolado */
+    .fullscreen-card-modal.show {
+      background: #020617 !important;
+      opacity: 1 !important;
+      backdrop-filter: none !important;
+      z-index: 99999 !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode.show {
+      background: #020617 !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .fullscreen-card-content {
+      width: min(1500px, 96vw) !important;
+      max-width: 96vw !important;
+      max-height: 88vh !important;
+      overflow-y: auto !important;
+      background: #0f172a !important;
+      border: 3px solid rgba(255,255,255,.32) !important;
+      box-shadow: 0 34px 90px rgba(0,0,0,.85) !important;
+      opacity: 1 !important;
+      backdrop-filter: none !important;
+      isolation: isolate !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card {
+      background: #111827 !important;
+      border: 2px solid rgba(255,255,255,.26) !important;
+      box-shadow: none !important;
+      opacity: 1 !important;
+      backdrop-filter: none !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card.concept-read {
+      background: #064e3b !important;
+      border-color: rgba(167,243,208,.65) !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card .item {
+      background: #1f2937 !important;
+      border: 1px solid rgba(255,255,255,.25) !important;
+      color: #f8fafc !important;
+      opacity: 1 !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card .item strong {
+      color: #fef08a !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-actions,
+    .fullscreen-card-modal.concept-modal-mode .formula-button-row,
+    .fullscreen-card-modal.concept-modal-mode .formula-open-btn,
+    .fullscreen-card-modal.concept-modal-mode .concept-fullscreen-btn {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .fullscreen-close {
+      z-index: 100001 !important;
+      background: #111827 !important;
+      border: 2px solid rgba(255,255,255,.38) !important;
+      opacity: 1 !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card::before,
+    .fullscreen-card-modal.concept-modal-mode .concept-card::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    /* Reduz um pouco o texto no deploy para não sobrepor em TVs pequenas */
+    .fullscreen-card-modal.concept-modal-mode .concept-card h3 {
+      font-size: clamp(40px, 4.2vw, 68px) !important;
+      line-height: 1.04 !important;
+    }
+
+    .fullscreen-card-modal.concept-modal-mode .concept-card .item {
+      font-size: clamp(24px, 2.15vw, 34px) !important;
+      line-height: 1.35 !important;
+      padding: 20px 24px !important;
+    }
+
+
     @media print {
       body {
         background: white !important;
@@ -3784,7 +3868,9 @@
 
       content.innerHTML = '';
       content.appendChild(clone);
-      document.getElementById('fullscreenCardModal').classList.add('show');
+      const modal = document.getElementById('fullscreenCardModal');
+      modal.classList.add('concept-modal-mode');
+      modal.classList.add('show');
     }
 
 
@@ -3914,6 +4000,7 @@
       const content = document.getElementById('fullscreenCardContent');
       if (!template || !content) return;
 
+      document.getElementById('fullscreenCardModal').classList.remove('concept-modal-mode');
       content.classList.add('formula-wide-mode');
       content.classList.remove('concept-fullscreen-mode');
       content.innerHTML = '';
@@ -3923,6 +4010,7 @@
 
     function openFullscreenCard(card) {
       const content = document.getElementById('fullscreenCardContent');
+      document.getElementById('fullscreenCardModal').classList.remove('concept-modal-mode');
       content.classList.remove('formula-wide-mode');
       content.classList.remove('concept-fullscreen-mode');
       const clone = card.cloneNode(true);
@@ -3940,7 +4028,9 @@
     }
 
     function closeFullscreenCard() {
-      document.getElementById('fullscreenCardModal').classList.remove('show');
+      const modal = document.getElementById('fullscreenCardModal');
+      modal.classList.remove('show');
+      modal.classList.remove('concept-modal-mode');
       document.getElementById('fullscreenCardContent').classList.remove('formula-wide-mode');
       document.getElementById('fullscreenCardContent').classList.remove('concept-fullscreen-mode');
     }
