@@ -2697,6 +2697,26 @@
     }
 
 
+
+    /* Aquecimento: caixa de texto fica verde somente quando clicada */
+    section[data-title="Aquecimento"] .warmup-version-card .quote {
+      cursor: pointer;
+      transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    section[data-title="Aquecimento"] .warmup-version-card .quote.reading-active {
+      background: linear-gradient(135deg, rgba(22,163,74,.30), rgba(34,197,94,.22)) !important;
+      border: 2px solid rgba(34,197,94,.55) !important;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), 0 12px 28px rgba(22,163,74,.15);
+    }
+
+    body.presentation-mode section[data-title="Aquecimento"] .warmup-version-card .quote.reading-active {
+      background: linear-gradient(135deg, rgba(22,163,74,.36), rgba(34,197,94,.28)) !important;
+      border: 2px solid rgba(74,222,128,.68) !important;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 16px 34px rgba(22,163,74,.20);
+    }
+
+
     @media print {
       body {
         background: white !important;
@@ -3540,6 +3560,14 @@
   </div>
 
   <script>
+
+    document.querySelectorAll('section[data-title="Aquecimento"] .warmup-version-card .quote').forEach(box => {
+      box.addEventListener('click', (event) => {
+        event.stopPropagation();
+        box.classList.toggle('reading-active');
+      });
+    });
+
     const slides = Array.from(document.querySelectorAll('.slide'));
     let current = 0;
 
